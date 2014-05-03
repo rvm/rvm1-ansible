@@ -38,7 +38,7 @@
   when: not installed_ruby_version.stat.exists
 
 - name: detect default ruby version
-  command: /usr/local/rvm/bin/rvm alias list default
+  command: "{{ ruby_rvm_install_path }}/bin/rvm alias list default"
   register: ruby_selected
 
 - name: ensure default ruby is selected
