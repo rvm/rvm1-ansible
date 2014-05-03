@@ -21,7 +21,7 @@ ruby_rvm_install_path: /usr/local/rvm
 
 ## Example playbook
 
-For the sake of this mini example let's assume you have a group called **app** and you have a typical `site.yml` file.
+For the sake of this example let's assume you have a group called **app** and you have a typical `site.yml` file.
 
 To use this role edit your `site.yml` file to look something like this:
 
