@@ -1,0 +1,46 @@
+---
+- name: detect rvm installation
+  stat: path=/etc/profile.d/rvm.sh
+  register: rvm_installation
+
+- name: ensure rvm installer is downloaded
+  get_url:
+    url: https://get.rvm.io
+    dest: "{{ ruby_temp_download_path }}/rvm-installer.sh"
+  when: not rvm_installation.stat.exists
+
+- name: ensure rvm installer is configured
+  file:
+    path: "{{ ruby_temp_download_path }}/rvm-installer.sh"
+    mode: 0755
+  when: not rvm_installation.stat.exists
+
+- name: ensure rvm stable is installed
+  command: "{{ ruby_temp_download_path }}/rvm-installer.sh --path {{ ruby_rvm_install_path }} stable"
+  when: not rvm_installation.stat.exists
+
+- name: ensure rvm installer is deleted
+  file:
+    path: "{{ ruby_temp_download_path }}/rvm-installer.sh"
+    state: absent
+  when: not rvm_installation.stat.exists
+
+- name: ensure rvm installs ruby dependencies
+  command: "{{ ruby_rvm_install_path }}/bin/rvm autolibs 3"
+  when: not rvm_installation.stat.exists
+
+- name: detect if ruby version is installed
+  stat: path={{ ruby_rvm_install_path }}/rubies/ruby-{{ ruby_version }}
+  register: installed_ruby_version
+
+- name: ensure ruby is installed
+  command: "{{ ruby_rvm_install_path }}/bin/rvm install ruby-{{ ruby_version }}"
+  when: not installed_ruby_version.stat.exists
+
+- name: detect default ruby version
+  command: /usr/local/rvm/bin/rvm alias list default
+  register: ruby_selected
+
+- name: ensure default ruby is selected
+  shell: source /etc/profile.d/rvm.sh && rvm use ruby-{{ ruby_version }} --default executable=/bin/bash
+  when: ruby_selected.stdout == '' or ruby_version not in ruby_selected.stdout

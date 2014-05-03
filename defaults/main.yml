@@ -1,0 +1,5 @@
+---
+ruby_version: 2.1.1 # X.X.X-pXXX format
+
+ruby_temp_download_path: /usr/local/src
+ruby_rvm_install_path: /usr/local/rvm
