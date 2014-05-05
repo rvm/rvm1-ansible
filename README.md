@@ -1,6 +1,6 @@
 ## What is ansible-ruby?
 
-It is an [Ansible](http://www.ansible.com/home) role to install a specific version of ruby without having to compile ruby on the machine you're setting up. It does this by using rvm under the hood.
+It is an [ansible](http://www.ansible.com/home) role to install a specific version of ruby without having to compile ruby on the machine you're setting up. It does this by using rvm under the hood.
 
 ### What problem does it solve and why is it useful?
 
@@ -34,7 +34,7 @@ To use this role edit your `site.yml` file to look something like this:
     - { role: nickjj.ruby, tags: ruby }
 ```
 
-Let's say you want to edit the default version, you can do this by opening or creating `yourplaybook/group_vars/app.yml` and then making it look something like this:
+Let's say you want to edit the default version, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
 
 ```
 ---
