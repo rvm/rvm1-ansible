@@ -10,13 +10,24 @@ ansible-ruby solves this by using rvm to install 1 or more versions of ruby. It 
 
 ## Role variables
 
-The only variable you need to concern yourself about is `ruby_version` if you're happy with the default download and install path.
+Below is a list of default values along with a description of what they do.
 
 ```
+# Set the version of ruby you want to install.
 ruby_version: 2.1.1 # X.X.X-pXXX format
 
+# Where should the rvm-installer and other temp files be downloaded to?
 ruby_temp_download_path: /usr/local/src
+
+# Where should rvm be installed to?
 ruby_rvm_install_path: /usr/local/rvm
+
+# Force upgrade rvm-installer to the latest stable version.
+ruby_rvm_force_upgrade_installer: false
+
+# If you are concerned rvm stable might not be stable then
+# you can set this to true so that rvm itself never upgrades.
+ruby_rvm_skip_upgrade: false
 ```
 
 ## Example playbook
