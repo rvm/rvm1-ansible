@@ -22,7 +22,7 @@ ruby_temp_download_path: /usr/local/src
 # Where should rvm be installed to?
 ruby_rvm_install_path: /usr/local/rvm
 
-# Force upgrade rvm-installer to the latest stable version.
+# Force upgrade the rvm-installer to the latest stable version.
 ruby_rvm_force_upgrade_installer: false
 
 # If you are concerned rvm stable might not be stable then
