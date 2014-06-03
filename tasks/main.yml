@@ -12,17 +12,18 @@
   register: rvm_current_version
   when: rvm_profile.stat.exists
 
-- name: detect stable rvm version
+- name: detect stable rvm version from url
   uri: url={{ ruby_rvm_stable_version_number }} return_content=yes
   register: rvm_stable_version_number
+  when: "'://' in ruby_rvm_stable_version_number"
 
-- name: ensure rvm installer is downloaded
+- name: ensure rvm installer is copied from url
   get_url:
     url: "{{ ruby_rvm_latest_installer }}"
     dest: "{{ ruby_temp_download_path }}/rvm-installer.sh"
   when: "'://' in ruby_rvm_latest_installer and not rvm_installer.stat.exists or ruby_rvm_force_upgrade_installer"
 
-- name: ensure rvm installer is copied
+- name: ensure rvm installer is copied from local file
   copy: src="{{ ruby_rvm_latest_installer }}" dest="{{ ruby_temp_download_path }}/rvm-installer.sh"
   when: not "://" in ruby_rvm_latest_installer and not rvm_installer.stat.exists or ruby_rvm_force_upgrade_installer
 
@@ -38,7 +39,7 @@
 
 - name: ensure rvm is upgraded
   shell: "{{ ruby_rvm_install_path }}/bin/rvm get stable && {{ ruby_rvm_install_path }}/bin/rvm reload"
-  when: not rvm_stable_version_number.content[:-1] in rvm_current_version.stdout and rvm_profile.stat.exists and not ruby_rvm_skip_upgrade
+  when: rvm_stable_version_number.content|default(ruby_rvm_stable_version_number)|replace("\n", "") > rvm_current_version.stdout.split()[1] and rvm_profile.stat.exists
 
 - name: ensure rvm installs ruby dependencies
   command: "{{ ruby_rvm_install_path }}/bin/rvm autolibs 3"

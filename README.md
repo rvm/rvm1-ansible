@@ -26,16 +26,16 @@ ruby_rvm_install_path: /usr/local/rvm
 # If you use a url, it must include http:// or https:// at the start.
 ruby_rvm_latest_installer: https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer
 
-# Which url or local path contains the stable version number of rvm?
+# Which url or value contains the stable version number of rvm?
 # If you use a url, it must include http:// or https:// at the start.
+# If you use a value, it should be something like 1.25.27 or any legal version number.
+
+# If you want to lock rvm to a specific version you could enter in the version number
+# that you have installed and the role would assume you always have the latest stable version.
 ruby_rvm_stable_version_number: https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION
 
 # Force upgrade the rvm-installer to the latest installer.
 ruby_rvm_force_upgrade_installer: false
-
-# If you are concerned rvm stable might not be stable then
-# you can set this to true so that rvm itself never upgrades.
-ruby_rvm_skip_upgrade: false
 ```
 
 ## Example playbook
@@ -53,11 +53,12 @@ To use this role edit your `site.yml` file to look something like this:
     - { role: nickjj.ruby, tags: ruby }
 ```
 
-Let's say you want to edit the default version, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
+Let's say you want to edit a few values, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
 
 ```
 ---
 ruby_version: 2.0.0
+ruby_rvm_stable_version_number: 1.25.26
 ```
 
 ## Installation
