@@ -12,13 +12,13 @@
   register: rvm_current_version
   when: rvm_profile.stat.exists
 
-- name: detect latest rvm version
-  uri: url=https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION return_content=yes
-  register: rvm_latest_version
+- name: detect stable rvm version
+  uri: url={{ ruby_rvm_stable_version_number }} return_content=yes
+  register: rvm_stable_version_number
 
 - name: ensure rvm installer is downloaded
   get_url:
-    url: https://get.rvm.io
+    url: "{{ ruby_rvm_latest_installer }}"
     dest: "{{ ruby_temp_download_path }}/rvm-installer.sh"
   when: not rvm_installer.stat.exists or ruby_rvm_force_upgrade_installer
 
@@ -34,7 +34,7 @@
 
 - name: ensure rvm is upgraded
   shell: "{{ ruby_rvm_install_path }}/bin/rvm get stable && {{ ruby_rvm_install_path }}/bin/rvm reload"
-  when: not rvm_latest_version.content[:-1] in rvm_current_version.stdout and rvm_profile.stat.exists and not ruby_rvm_skip_upgrade
+  when: not rvm_stable_version_number.content[:-1] in rvm_current_version.stdout and rvm_profile.stat.exists and not ruby_rvm_skip_upgrade
 
 - name: ensure rvm installs ruby dependencies
   command: "{{ ruby_rvm_install_path }}/bin/rvm autolibs 3"

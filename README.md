@@ -22,7 +22,15 @@ ruby_temp_download_path: /usr/local/src
 # Where should rvm be installed to?
 ruby_rvm_install_path: /usr/local/rvm
 
-# Force upgrade the rvm-installer to the latest stable version.
+# Which url or local path contains the rvm-installer script?
+# If you use a url, it must include http:// or https:// at the start.
+ruby_rvm_latest_installer: https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer
+
+# Which url or local path contains the stable version number of rvm?
+# If you use a url, it must include http:// or https:// at the start.
+ruby_rvm_stable_version_number: https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION
+
+# Force upgrade the rvm-installer to the latest installer.
 ruby_rvm_force_upgrade_installer: false
 
 # If you are concerned rvm stable might not be stable then
