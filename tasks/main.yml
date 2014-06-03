@@ -20,7 +20,11 @@
   get_url:
     url: "{{ ruby_rvm_latest_installer }}"
     dest: "{{ ruby_temp_download_path }}/rvm-installer.sh"
-  when: not rvm_installer.stat.exists or ruby_rvm_force_upgrade_installer
+  when: "'://' in ruby_rvm_latest_installer and not rvm_installer.stat.exists or ruby_rvm_force_upgrade_installer"
+
+- name: ensure rvm installer is copied
+  copy: src="{{ ruby_rvm_latest_installer }}" dest="{{ ruby_temp_download_path }}/rvm-installer.sh"
+  when: not "://" in ruby_rvm_latest_installer and not rvm_installer.stat.exists or ruby_rvm_force_upgrade_installer
 
 - name: ensure rvm installer is configured
   file:
