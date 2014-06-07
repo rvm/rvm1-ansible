@@ -14,7 +14,7 @@ Below is a list of default values along with a description of what they do.
 
 ```
 # Set the version of ruby you want to install.
-ruby_version: 2.1.1 # X.X.X-pXXX format
+ruby_version: 2.1.2 # X.X.X-pXXX format
 
 # Where should the rvm-installer and other temp files be downloaded to?
 ruby_temp_download_path: /usr/local/src
