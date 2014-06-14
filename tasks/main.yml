@@ -58,5 +58,5 @@
   register: ruby_selected
 
 - name: ensure default ruby is selected
-  command: "{{ ruby_rvm_install_path }}/bin/rvm use ruby-{{ ruby_version }}"
+  command: "{{ ruby_rvm_install_path }}/bin/rvm --default use {{ ruby_version }}"
   when: ruby_selected.stdout == '' or ruby_version not in ruby_selected.stdout
