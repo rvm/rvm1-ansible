@@ -58,5 +58,5 @@
   register: ruby_selected
 
 - name: ensure default ruby is selected
-  shell: source /etc/profile.d/rvm.sh && rvm use ruby-{{ ruby_version }} --default executable=/bin/bash
+  command: "{{ ruby_rvm_install_path }}/bin/rvm use ruby-{{ ruby_version }}"
   when: ruby_selected.stdout == '' or ruby_version not in ruby_selected.stdout
