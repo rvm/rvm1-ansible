@@ -4,7 +4,7 @@
   sudo: true
   vars:
     ruby_temp_download_path: /home/travis/tmp
-    ruby_rvm_install_path: /home/travis/.rmv
+    ruby_rvm_install_path: /home/travis/.rvm
 
   roles:
     - ansible-ruby

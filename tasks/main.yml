@@ -57,14 +57,6 @@
   command: "{{ ruby_rvm_install_path }}/bin/rvm alias list default"
   register: ruby_selected
 
-- name: detect if rvm is system installed
-  stat: path=/etc/profile.d/rvm.sh
-  register: rvm_system_install
-
-- name: ensure default ruby is selected (home install)
-  command: "{{ ruby_rvm_install_path }}/bin/rvm --default use ruby-{{ ruby_version }}"
-  when: not rvm_system_install.stat.exists and (ruby_selected.stdout == '' or ruby_version not in ruby_selected.stdout)
-
-- name: ensure default ruby is selected (system install)
-  shell: source /etc/profile.d/rvm.sh && rvm --default use ruby-{{ ruby_version }} executable=/bin/bash
-  when: rvm_system_install.stat.exists and (ruby_selected.stdout == '' or ruby_version not in ruby_selected.stdout)
+- name: ensure default ruby is selected
+  command: "{{ ruby_rvm_install_path }}/bin/rvm alias create default ruby-{{ ruby_version }}"
+  when: ruby_selected.stdout == '' or ruby_version not in ruby_selected.stdout
