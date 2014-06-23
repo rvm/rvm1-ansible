@@ -4,7 +4,7 @@ python: "2.7"
 
 env:
   - SITE_SYSTEM_AND_INVENTORY="tests/test_system.yml -i tests/inventory"
-  - SITE_HOME_AND_INVENTORY="tests/test_home.yml -i tests/inventory"
+  #- SITE_HOME_AND_INVENTORY="tests/test_home.yml -i tests/inventory"
 
 before_install:
   - "__rvm_unload ; rm -rf ~/.rvm"
@@ -26,16 +26,16 @@ script:
     | grep -q 'ruby'
     && (echo 'Version test: pass' && exit 0)
     || (echo 'Version test: fail' && exit 1)
-  - "__rvm_unload ; rm -rf ~/.rvm"
-  - "ansible-playbook $SITE_HOME_AND_INVENTORY --syntax-check"
-  - "ansible-playbook $SITE_HOME_AND_INVENTORY --connection=local -vvvv"
-  - >
-    ansible-playbook $SITE_HOME_AND_INVENTORY --connection=local
-    | grep -q 'changed=2.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-  - >
-    ruby -v
-    | grep -q 'ruby'
-    && (echo 'Version test: pass' && exit 0)
-    || (echo 'Version test: fail' && exit 1)
+  # - "__rvm_unload ; rm -rf ~/.rvm"
+  # - "ansible-playbook $SITE_HOME_AND_INVENTORY --syntax-check"
+  # - "ansible-playbook $SITE_HOME_AND_INVENTORY --connection=local -vvvv"
+  # - >
+  #   ansible-playbook $SITE_HOME_AND_INVENTORY --connection=local
+  #   | grep -q 'changed=2.*failed=0'
+  #   && (echo 'Idempotence test: pass' && exit 0)
+  #   || (echo 'Idempotence test: fail' && exit 1)
+  # - >
+  #   ruby -v
+  #   | grep -q 'ruby'
+  #   && (echo 'Version test: pass' && exit 0)
+  #   || (echo 'Version test: fail' && exit 1)
