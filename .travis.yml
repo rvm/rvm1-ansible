@@ -7,8 +7,7 @@ env:
   - SITE_HOME_AND_INVENTORY="tests/test_home.yml -i tests/inventory"
 
 before_install:
-  - "rvm get head ; __rvm_unload ; yes | ~/.rvm/bin/rvm --trace --force implode"
-  - "rm -rf ~/.rvm"
+  - "__rvm_unload ; rm -rf ~/.rvm"
 
 install:
   - "pip install ansible==1.6.2"
@@ -27,8 +26,7 @@ script:
     | grep -q 'ruby'
     && (echo 'Version test: pass' && exit 0)
     || (echo 'Version test: fail' && exit 1)
-  - "rvm get head ; __rvm_unload ; yes | ~/.rvm/bin/rvm --trace --force implode"
-  - "rm -rf ~/.rvm"
+  - "__rvm_unload ; rm -rf ~/.rvm"
   - "ansible-playbook $SITE_HOME_AND_INVENTORY --syntax-check"
   - "ansible-playbook $SITE_HOME_AND_INVENTORY --connection=local -vvvv"
   - >
