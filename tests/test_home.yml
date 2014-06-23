@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  remote_user: travis
+  sudo: true
+  vars:
+    ruby_temp_download_path: /home/travis/tmp
+    ruby_rvm_install_path: /home/travis/.rmv
+
+  roles:
+    - ansible-ruby

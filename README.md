@@ -1,4 +1,4 @@
-## What is ansible-ruby?
+## What is ansible-ruby? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-ruby.png)](http://travis-ci.org/nickjj/ansible-ruby)
 
 It is an [ansible](http://www.ansible.com/home) role to install a specific version of ruby without having to compile ruby on the machine you're setting up. It does this by using rvm under the hood.
 
