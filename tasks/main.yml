@@ -8,7 +8,8 @@
   register: rvm_installer
 
 - name: detect current rvm version
-  shell: "{{ ruby_rvm_install_path }}/bin/rvm version"
+  command: "{{ ruby_rvm_install_path }}/bin/rvm version"
+  changed_when: false
   register: rvm_current_version
   when: rvm_binary.stat.exists
 
@@ -55,6 +56,7 @@
 
 - name: detect default ruby version
   command: "{{ ruby_rvm_install_path }}/bin/rvm alias list default"
+  changed_when: false
   register: ruby_selected
 
 - name: ensure default ruby is selected
