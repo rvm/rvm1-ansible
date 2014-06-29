@@ -22,7 +22,7 @@ script:
   - "ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv"
   - >
     ansible-playbook $SITE_AND_INVENTORY --connection=local
-    | grep -q 'changed=2.*failed=0'
+    | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
   - >
