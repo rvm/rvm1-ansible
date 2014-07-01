@@ -43,22 +43,22 @@ ruby_rvm_force_upgrade_installer: false
 
 You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths for easy access.
 
-- `ruby_rvm`:
+- `ruby_rvm`
     - The path to the rvm binary
 
 - `ruby_rvm_default_wrappers`:
     - The path containing all of the wrapped ruby related binaries
 
-- `ruby`:
+- `ruby`
     - The path to the ruby binary
 
-- `ruby_gem`:
+- `ruby_gem`
     - The path to the gem binary
 
-- `ruby_bundle`:
+- `ruby_bundle`
     - The path to the bundle binary
 
-- `ruby_rake`:
+- `ruby_rake`
     - The path to the rake binary with bundle exec already applied
 
 ### Example
