@@ -1,4 +1,5 @@
 ---
+ruby_default_ruby_version: '{{ ruby_rubies | last if ruby_rubies and ruby_rubies is iterable else "" }}'
 ruby_rvm: '{{ ruby_rvm_install_path }}/bin/rvm'
 ruby_rvm_default_wrappers: '{{ ruby_rvm_install_path }}/wrappers/default'
 ruby: '{{ ruby_rvm_default_wrappers }}/ruby'

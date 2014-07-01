@@ -13,9 +13,11 @@ ansible-ruby solves this by using rvm to install 1 or more versions of ruby. It 
 Below is a list of default values along with a description of what they do.
 
 ```
-# Set the version of ruby you want to install.
-# # X.X.X-pXXX format.
-ruby_version: '2.1.2' 
+# Install 1 or more versions of ruby, just add them to the list.
+# The last version listed will be set as the default ruby.
+# Change it to `ruby_rubies:` if you want no rubies installed.
+ruby_rubies:
+  - 'ruby-2.1.2'
 
 # Where should the rvm-installer and other temp files be downloaded to?
 ruby_rvm_temp_download_path: '/usr/local/src'
@@ -42,6 +44,9 @@ ruby_rvm_force_upgrade_installer: false
 ## Exposed variables for use in other roles
 
 You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths for easy access.
+
+- `ruby_default_ruby_version`
+    - The default ruby version that is selected
 
 - `ruby_rvm`
     - The path to the rvm binary
