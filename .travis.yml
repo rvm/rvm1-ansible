@@ -27,6 +27,26 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
   - >
     ruby -v
-    | grep -q 'ruby'
-    && (echo 'Yes ruby test: pass' && exit 0)
-    || (echo 'Yes ruby test: fail' && exit 1)
+    | grep -q '2.1.2'
+    && (echo 'Default ruby test: pass' && exit 0)
+    || (echo 'Default ruby test: fail' && exit 1)
+  - >
+    ls ~/.rvm/rubies
+    | grep -q 'ruby-2.1.0'
+    && (echo 'Multiple rubies test: pass' && exit 0)
+    || (echo 'Multiple rubies test: fail' && exit 1)
+  - >
+    ls ~/.rvm
+    | grep -q 'travis foo'
+    && (echo 'Ownership test: pass' && exit 0)
+    || (echo 'Ownership test: fail' && exit 1)
+  - >
+    ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=2.1.0'
+    | grep -q 'changed=1.*failed=0'
+    && (echo 'Delete ruby test: pass' && exit 0)
+    || (echo 'Delete ruby test: fail' && exit 1)
+  - >
+    ls ~/.rvm/rubies
+    | grep -q 'ruby-2.1.0'
+    && (echo 'Really deleted ruby test: pass' && exit 1)
+    || (echo 'Really deleted ruby test: fail' && exit 0)
