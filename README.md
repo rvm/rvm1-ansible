@@ -25,6 +25,10 @@ rvm1_group: 'rvm'
 rvm1_rubies:
   - 'ruby-2.1.2'
 
+# Which version of ruby do you want to delete?
+# Example: `rvm1_delete_ruby: ruby-2.1.0`
+rvm1_delete_ruby: ''
+
 # Where should the rvm-installer and other temp files be downloaded to?
 rvm1_temp_download_path: '/usr/local/src'
 
@@ -75,6 +79,28 @@ You will likely want to use various ruby related commands in other roles. This r
 ### Example
 
 If you wanted to run a database migration in rails you would use `{{ rvm1_rake }} db:migrate`.
+
+## Upgrading and removing old versions of ruby
+
+A common work flow for upgrading your ruby version would be:
+
+1. Install the new version
+2. Run your application role so that bundle install re-installs your gems
+3. Delete the previous version of ruby
+
+You can delete a version of ruby with this role in 1 of 2 ways:
+
+### Edit your inventory directly
+
+You could overwrite `rvm1_delete_ruby: 'ruby-2.1.0'` and then run your play book. This would work but then you would have to go back and edit your inventory to make it an empty string afterwards.
+
+The delete task is idempotent but it still requires you to make 2 edits.
+
+#### Leverage ansible's `--extra-vars`
+
+Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play book command and that version will be removed without having to manually edit your inventory.
+
+Not having to edit anything sure sounds better to me.
 
 ## Example playbook
 

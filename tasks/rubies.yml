@@ -23,3 +23,15 @@
 
 - name: ensure rvm install path is writable by the set owner:group
   file: path='{{ rvm1_install_path }}' state=directory recurse=yes owner='{{ rvm1_user }}' group='{{ rvm1_group }}'
+
+- name: detect if ruby version can be deleted
+  command: '{{ rvm1 }} {{ rvm1_delete_ruby }} do true'
+  changed_when: false
+  failed_when: false
+  register: detect_delete_ruby
+  when: rvm1_delete_ruby
+
+- name: ensure ruby version is deleted
+  command: '{{ rvm1 }} remove {{ rvm1_delete_ruby }}'
+  changed_when: false
+  when: rvm1_delete_ruby and detect_delete_ruby.rc == 0

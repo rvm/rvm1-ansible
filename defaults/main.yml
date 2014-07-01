@@ -5,6 +5,8 @@ rvm1_group: 'rvm'
 rvm1_rubies:
   - 'ruby-2.1.2'
 
+rvm1_delete_ruby:
+
 rvm1_temp_download_path: '/usr/local/src'
 rvm1_install_path: '/usr/local/rvm'
 
