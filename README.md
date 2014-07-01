@@ -13,12 +13,6 @@ ansible-ruby solves this by using rvm to install 1 or more versions of ruby. It 
 Below is a list of default values along with a description of what they do.
 
 ```
-# Which user should own all of rvm's files?
-rvm1_user: '{{ ansible_ssh_user }}'
-
-# Which group should rvm be installed to?
-rvm1_group: 'rvm'
-
 # Install 1 or more versions of ruby, just add them to the list.
 # The last version listed will be set as the default ruby.
 # Change it to `ruby_rubies:` if you want no rubies installed.
@@ -28,6 +22,12 @@ rvm1_rubies:
 # Which version of ruby do you want to delete?
 # Example: `rvm1_delete_ruby: ruby-2.1.0`
 rvm1_delete_ruby: ''
+
+# Which user should own all of rvm's files?
+rvm1_user: '{{ ansible_ssh_user }}'
+
+# Which group should rvm be installed to?
+rvm1_group: 'rvm'
 
 # Where should the rvm-installer and other temp files be downloaded to?
 rvm1_temp_download_path: '/usr/local/src'
