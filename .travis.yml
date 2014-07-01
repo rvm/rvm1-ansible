@@ -7,6 +7,7 @@ env:
 
 before_install:
   - '__rvm_unload ; rm -rf ~/.rvm'
+  - 'sudo usermod -G audio travis'
 
 install:
   - 'pip install ansible==1.6.2'
@@ -48,7 +49,7 @@ script:
     && (echo 'Delete ruby test: pass' && exit 0)
     || (echo 'Delete ruby test: fail' && exit 1)
   - >
-    ls ~/.rvm/rubies
-    | grep -q 'ruby-2.1.0'
-    && (echo 'Really deleted ruby test: pass' && exit 1)
-    || (echo 'Really deleted ruby test: fail' && exit 0)
+    ls ~/.rvm/
+    | grep -q ''
+    && (echo 'Really deleted ruby test: pass' && exit 0)
+    || (echo 'Really deleted ruby test: fail' && exit 1)
