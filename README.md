@@ -1,4 +1,4 @@
-## What is ansible-ruby? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-ruby.png)](http://travis-ci.org/nickjj/ansible-ruby)
+## What is rvm1-ansible? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-ruby.png)](http://travis-ci.org/nickjj/ansible-ruby)
 
 It is an [ansible](http://www.ansible.com/home) role to install and manage ruby versions using rvm.
 
@@ -13,21 +13,27 @@ ansible-ruby solves this by using rvm to install 1 or more versions of ruby. It 
 Below is a list of default values along with a description of what they do.
 
 ```
+# Which user should own all of rvm's files?
+rvm1_user: '{{ ansible_ssh_user }}'
+
+# Which group should rvm be installed to?
+rvm1_group: 'rvm'
+
 # Install 1 or more versions of ruby, just add them to the list.
 # The last version listed will be set as the default ruby.
 # Change it to `ruby_rubies:` if you want no rubies installed.
-ruby_rubies:
+rvm1_rubies:
   - 'ruby-2.1.2'
 
 # Where should the rvm-installer and other temp files be downloaded to?
-ruby_rvm_temp_download_path: '/usr/local/src'
+rvm1_temp_download_path: '/usr/local/src'
 
 # Where should rvm be installed to?
-ruby_rvm_install_path: '/usr/local/rvm'
+rvm1_install_path: '/usr/local/rvm'
 
 # Which url or local path contains the rvm-installer script?
 # If you use a url, it must include http:// or https:// at the start.
-ruby_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
+rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
 
 # Which url or value contains the stable version number of rvm?
 # If you use a url, it must include http:// or https:// at the start.
@@ -35,40 +41,40 @@ ruby_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/m
 
 # If you want to lock rvm to a specific version you could enter in the version number
 # that you have installed and the role would assume you always have the latest stable version.
-ruby_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
+rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
 
 # Force upgrade the rvm-installer to the latest version.
-ruby_rvm_force_upgrade_installer: false
+rvm1_rvm_force_upgrade_installer: false
 ```
 
 ## Exposed variables for use in other roles
 
-You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths for easy access.
+You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths and variables for easy access.
 
-- `ruby_default_ruby_version`
+- `rvm1_default_ruby_version`
     - The default ruby version that is selected
 
-- `ruby_rvm`
+- `rvm1`
     - The path to the rvm binary
 
-- `ruby_rvm_default_wrappers`:
+- `rvm1_default_wrappers`:
     - The path containing all of the wrapped ruby related binaries
 
-- `ruby`
+- `rvm1_ruby`
     - The path to the ruby binary
 
-- `ruby_gem`
+- `rvm1_gem`
     - The path to the gem binary
 
-- `ruby_bundle`
+- `rvm1_bundle`
     - The path to the bundle binary
 
-- `ruby_rake`
+- `rvm1_rake`
     - The path to the rake binary with bundle exec already applied
 
 ### Example
 
-If you wanted to run a database migration in rails you would use `{{ ruby_rake }} db:migrate`.
+If you wanted to run a database migration in rails you would use `{{ rvm1_rake }} db:migrate`.
 
 ## Example playbook
 
@@ -89,13 +95,15 @@ Let's say you want to edit a few values, you can do this by opening or creating 
 
 ```
 ---
-ruby_version: 2.0.0
-ruby_rvm_stable_version_number: 1.25.26
+rvm1_rubies:
+  - 'ruby-2.1.0'
+  - 'ruby-2.1.2'
+rvm1_rvm_stable_version_number: 1.25.26
 ```
 
 ## Installation
 
-`$ ansible-galaxy install nickjj.ruby`
+`$ ansible-galaxy install rvm_io.rvm1-ruby`
 
 ## Requirements
 
