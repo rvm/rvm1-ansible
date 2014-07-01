@@ -129,7 +129,7 @@ rvm1_rvm_stable_version_number: 1.25.26
 
 ## Installation
 
-`$ ansible-galaxy install rvm_io.rvm1-ruby`
+`$ ansible-galaxy install nickjj.ruby`
 
 ## Requirements
 
