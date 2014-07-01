@@ -25,6 +25,7 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
+  - 'ruby -v'
   - >
     ruby -v
     | grep -q '2.1.2'
@@ -37,7 +38,7 @@ script:
     || (echo 'Multiple rubies test: fail' && exit 1)
 
   - >
-    ls ~/.rvm
+    ls -l ~/.rvm
     | grep -q 'travis audio'
     && (echo 'Ownership test: pass' && exit 0)
     || (echo 'Ownership test: fail' && exit 1)
