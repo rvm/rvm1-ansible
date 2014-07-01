@@ -1,11 +1,9 @@
 ---
-ruby_version: 2.1.2 # X.X.X-pXXX format
+ruby_version: '2.1.2'
 
-ruby_temp_download_path: /usr/local/src
-ruby_rvm_install_path: /usr/local/rvm
-
-ruby_rvm_latest_installer: https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer
-ruby_rvm_stable_version_number: https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION
+ruby_rvm_temp_download_path: '/usr/local/src'
+ruby_rvm_install_path: '/usr/local/rvm'
+ruby_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
+ruby_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
 
 ruby_rvm_force_upgrade_installer: false
-ruby_rvm_skip_upgrade: false

@@ -1,6 +1,6 @@
 ## What is ansible-ruby? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-ruby.png)](http://travis-ci.org/nickjj/ansible-ruby)
 
-It is an [ansible](http://www.ansible.com/home) role to install a specific version of ruby without having to compile ruby on the machine you're setting up. It does this by using rvm under the hood.
+It is an [ansible](http://www.ansible.com/home) role to install and manage ruby versions using rvm.
 
 ### What problem does it solve and why is it useful?
 
@@ -14,17 +14,18 @@ Below is a list of default values along with a description of what they do.
 
 ```
 # Set the version of ruby you want to install.
-ruby_version: 2.1.2 # X.X.X-pXXX format
+# # X.X.X-pXXX format.
+ruby_version: '2.1.2' 
 
 # Where should the rvm-installer and other temp files be downloaded to?
-ruby_temp_download_path: /usr/local/src
+ruby_rvm_temp_download_path: '/usr/local/src'
 
 # Where should rvm be installed to?
-ruby_rvm_install_path: /usr/local/rvm
+ruby_rvm_install_path: '/usr/local/rvm'
 
 # Which url or local path contains the rvm-installer script?
 # If you use a url, it must include http:// or https:// at the start.
-ruby_rvm_latest_installer: https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer
+ruby_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
 
 # Which url or value contains the stable version number of rvm?
 # If you use a url, it must include http:// or https:// at the start.
@@ -32,11 +33,36 @@ ruby_rvm_latest_installer: https://raw.githubusercontent.com/wayneeseguin/rvm/ma
 
 # If you want to lock rvm to a specific version you could enter in the version number
 # that you have installed and the role would assume you always have the latest stable version.
-ruby_rvm_stable_version_number: https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION
+ruby_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
 
-# Force upgrade the rvm-installer to the latest installer.
+# Force upgrade the rvm-installer to the latest version.
 ruby_rvm_force_upgrade_installer: false
-```
+
+## Exposed variables for use in other roles
+
+You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths for easy access.
+
+- `ruby_rvm`:
+    - The path to the rvm binary
+
+- `ruby_rvm_default_wrappers`:
+    - The path containing all of the wrapped ruby related binaries
+
+- `ruby`:
+    - The path to the ruby binary
+
+- `ruby_gem`:
+    - The path to the gem binary
+
+- `ruby_bundle`:
+    - The path to the bundle binary
+
+- `ruby_rake`:
+    - The path to the rake binary with bundle exec already applied
+
+### Example
+
+If you wanted to run a database migration in rails you would use `{{ ruby_rake }} db:migrate`.
 
 ## Example playbook
 

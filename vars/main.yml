@@ -1,0 +1,7 @@
+---
+ruby_rvm: '{{ ruby_rvm_install_path }}/bin/rvm'
+ruby_rvm_default_wrappers: '{{ ruby_rvm_install_path }}/wrappers/default'
+ruby: '{{ ruby_rvm_default_wrappers }}/ruby'
+ruby_gem: '{{ ruby_rvm_default_wrappers }}/gem'
+ruby_bundle: '{{ ruby_rvm_default_wrappers }}/bundle'
+ruby_rake: '{{ ruby_bundle }} exec {{ ruby_rvm_default_wrappers }}/rake'
