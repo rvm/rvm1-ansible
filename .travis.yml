@@ -37,7 +37,7 @@ script:
     || (echo 'Multiple rubies test: fail' && exit 1)
   - >
     ls ~/.rvm
-    | grep -q 'travis foo'
+    | grep -q 'travis travis'
     && (echo 'Ownership test: pass' && exit 0)
     || (echo 'Ownership test: fail' && exit 1)
   - >
