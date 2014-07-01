@@ -6,7 +6,7 @@ env:
   - SITE_AND_INVENTORY='tests/test.yml -i tests/inventory'
 
 before_install:
-  - '__rvm_unload ; rm -rf ~/.rvm'
+  - '__rvm_unload ; rm -rf ~/.rvm'WW
 
 install:
   - 'pip install ansible==1.6.2'
@@ -35,9 +35,10 @@ script:
     | grep -q 'ruby-2.1.0'
     && (echo 'Multiple rubies test: pass' && exit 0)
     || (echo 'Multiple rubies test: fail' && exit 1)
+
   - >
     ls ~/.rvm
-    | grep -q 'travis travis'
+    | grep -q 'travis audio'
     && (echo 'Ownership test: pass' && exit 0)
     || (echo 'Ownership test: fail' && exit 1)
   - >
