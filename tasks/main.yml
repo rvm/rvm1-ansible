@@ -14,7 +14,7 @@
   when: rvm_binary.stat.exists
 
 - name: detect stable rvm version from url
-  uri: url='{{ ruby_rvm_stable_version_number }} return_content=yes'
+  uri: url='{{ ruby_rvm_stable_version_number }}' return_content=yes
   register: rvm_stable_version_number
   when: '"://" in ruby_rvm_stable_version_number'
 
@@ -40,7 +40,7 @@
 
 - name: ensure rvm is upgraded
   shell: '{{ ruby_rvm }} get stable && {{ ruby_rvm }} reload'
-  when: rvm_binary.stat.exists and rvm_stable_version_number.content|default(ruby_rvm_stable_version_number)|replace("\n", "") > rvm_current_version.stdout.split()[1]
+  when: rvm_binary.stat.exists and rvm_stable_version_number.content|default(ruby_rvm_stable_version_number)|replace('\n', '') > rvm_current_version.stdout.split()[1]
 
 - name: ensure rvm installs ruby dependencies
   command: '{{ ruby_rvm }} autolibs 3'
