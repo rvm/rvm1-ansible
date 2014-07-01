@@ -37,6 +37,7 @@ ruby_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/
 
 # Force upgrade the rvm-installer to the latest version.
 ruby_rvm_force_upgrade_installer: false
+```
 
 ## Exposed variables for use in other roles
 
