@@ -26,9 +26,8 @@ script:
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
-  - 'ruby -v'
   - >
-    ruby -v
+    ~/.rvm/wrappers/default/ruby -v
     | grep -q '2.1.2'
     && (echo 'Default ruby test: pass' && exit 0)
     || (echo 'Default ruby test: fail' && exit 1)
