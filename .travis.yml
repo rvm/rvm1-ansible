@@ -36,7 +36,6 @@ script:
     | grep -q 'ruby-2.1.0'
     && (echo 'Multiple rubies test: pass' && exit 0)
     || (echo 'Multiple rubies test: fail' && exit 1)
-
   - >
     ls -l ~/.rvm
     | grep -q 'travis audio'
