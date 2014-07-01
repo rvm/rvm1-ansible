@@ -8,9 +8,9 @@
       - 'ruby-2.1.0'
       - 'ruby-2.1.2'
     rvm1_user: 'travis'
-    rvm1_group: 'audio'
+    #rvm1_group: 'audio'
     rvm1_temp_download_path: '/tmp'
-    rvm1_install_path: '~/.rvm'
+    #rvm1_install_path: '~/.rvm'
 
   roles:
     - ansible-ruby
