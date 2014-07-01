@@ -44,7 +44,7 @@ script:
     || (echo 'Ownership test: fail' && exit 1)
   - >
     ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=2.1.0'
-    | grep -q 'changed=1.*failed=0'
+    | grep -q 'ok=1.*failed=0'
     && (echo 'Delete ruby test: pass' && exit 0)
     || (echo 'Delete ruby test: fail' && exit 1)
   - >
