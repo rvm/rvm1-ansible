@@ -96,7 +96,7 @@ You could overwrite `rvm1_delete_ruby: 'ruby-2.1.0'` and then run your play book
 
 The delete task is idempotent but it still requires you to make 2 edits.
 
-#### Leverage ansible's `--extra-vars`
+### Leverage ansible's `--extra-vars`
 
 Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play book command and that version will be removed without having to manually edit your inventory.
 
