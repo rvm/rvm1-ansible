@@ -1,6 +1,6 @@
 ---
 - name: detect rvm binary
-  stat: path='{{ rvm1 }}'
+  stat: path='{{ ansible_local.rvm1.rvm }}'
   register: rvm_binary
 
 - name: detect rvm installer
@@ -8,7 +8,7 @@
   register: rvm_installer
 
 - name: detect current rvm version
-  command: '{{ rvm1 }} version'
+  command: '{{ ansible_local.rvm1.rvm }} version'
   changed_when: false
   register: rvm_current_version
   when: rvm_binary.stat.exists
@@ -39,9 +39,9 @@
   when: not rvm_binary.stat.exists
 
 - name: ensure rvm is upgraded
-  shell: '{{ rvm1 }} get stable && {{ rvm1 }} reload'
+  shell: '{{ ansible_local.rvm1.rvm }} get stable && {{ ansible_local.rvm1.rvm }} reload'
   when: rvm_binary.stat.exists and rvm_stable_version_number.content | default(rvm1_rvm_stable_version_number) | replace('\n', '') > rvm_current_version.stdout.split()[1]
 
 - name: ensure rvm installs ruby dependencies
-  command: '{{ rvm1 }} autolibs 3'
+  command: '{{ ansible_local.rvm1.rvm }} autolibs 3'
   when: not rvm_binary.stat.exists
