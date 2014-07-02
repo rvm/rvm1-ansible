@@ -1,0 +1,6 @@
+---
+- name: ensure /etc/ansible/facts.d is created
+  file: path='/etc/ansible/facts.d' state='directory'
+
+- name: ensure facts are persisted in /etc/ansible/facts.d/rvm1.fact
+  template: src='etc/ansible/facts.d/rvm1.fact.j2' dest='/etc/ansible/facts.d/rvm1.fact'

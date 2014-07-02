@@ -51,9 +51,11 @@ rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/
 rvm1_rvm_force_upgrade_installer: false
 ```
 
-## Exposed variables for use in other roles
+## Facts
 
-You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths and variables for easy access.
+You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths and variables as persisted facts.
+
+Since the values are saved to `/etc/ansible/facts.d/rvm1.fact` you do not need to run this role every time you invoke your play book to have access to the facts. They will be persisted between play book runs.
 
 - `rvm1_default_ruby_version`
     - The default ruby version that is selected
