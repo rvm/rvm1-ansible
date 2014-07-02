@@ -78,7 +78,7 @@ You will likely want to use various ruby related commands in other roles. This r
 
 ### Example
 
-If you wanted to run a database migration in rails you would use `{{ rvm1.rake }} db:migrate`.
+If you wanted to run a database migration in rails you would use `{{ rvm1_rake }} db:migrate`.
 
 ## Upgrading and removing old versions of ruby
 
