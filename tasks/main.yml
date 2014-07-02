@@ -1,4 +1,4 @@
 ---
-- include: 'facts.yml
+- include: 'facts.yml'
 - include: 'rvm.yml'
 - include: 'rubies.yml'
