@@ -51,38 +51,34 @@ rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/
 rvm1_rvm_force_upgrade_installer: false
 ```
 
-## Facts
+## Exposed variables
 
-You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths and variables as persisted facts.
+You will likely want to use various ruby related commands in other roles. This role exposes a number of popular paths and variables that you can use.
 
-Since the values are saved to `/etc/ansible/facts.d/rvm1.fact` you do not need to run this role every time you invoke your play book to have access to the facts. They will be persisted between play book runs.
-
-- `default_ruby_version`
+- `rvm1_default_ruby_version`
     - The default ruby version that is selected
 
-- `rvm`
+- `rvm1_rvm`
     - The path to the rvm binary
 
-- `default_wrappers`:
+- `rvm1_default_wrappers`:
     - The path containing all of the wrapped ruby related binaries
 
-- `ruby`
+- `rvm1_ruby`
     - The path to the ruby binary
 
-- `gem`
+- `rvm1_gem`
     - The path to the gem binary
 
-- `bundle`
+- `rvm1_bundle`
     - The path to the bundle binary
 
-- `rake`
+- `rvm1_rake`
     - The path to the rake binary with bundle exec already applied
 
 ### Example
 
-You can access them in any play or role by prepending `ansible_local` to the value.
-
-If you wanted to run a database migration in rails you would use `{{ ansible_local.rvm1.rake }} db:migrate`.
+If you wanted to run a database migration in rails you would use `{{ rvm1.rake }} db:migrate`.
 
 ## Upgrading and removing old versions of ruby
 
