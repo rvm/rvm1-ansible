@@ -58,7 +58,7 @@ You will likely want to use various ruby related commands in other roles. This r
 - `rvm1_default_ruby_version`
     - The default ruby version that is selected
 
-- `rvm1_rvm`
+- `rvm1`
     - The path to the rvm binary
 
 - `rvm1_default_wrappers`:
