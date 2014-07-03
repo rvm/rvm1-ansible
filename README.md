@@ -135,6 +135,10 @@ rvm1_rvm_stable_version_number: 1.25.26
 
 Tested on ubuntu 12.04 LTS but it should work on other versions that are similar.
 
+## Ansible galaxy
+
+You can find it on the official [ansible galaxy](https://galaxy.ansible.com/list#/roles/1087) if you want to rate it.
+
 ## License
 
 MIT
