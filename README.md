@@ -1,4 +1,4 @@
-## What is rvm1-ansible? [![Build Status](https://secure.travis-ci.org/nickjj/ansible-ruby.png)](http://travis-ci.org/nickjj/ansible-ruby)
+## What is rvm1-ansible? [![Build Status](https://secure.travis-ci.org/rvm/rvm1 -ansible.png)](http://travis-ci.org/rvm/rvm1-ansible)
 
 It is an [ansible](http://www.ansible.com/home) role to install and manage ruby versions using rvm.
 
@@ -114,7 +114,7 @@ To use this role edit your `site.yml` file to look something like this:
 - hosts: app
 
   roles:
-    - { role: nickjj.ruby, tags: ruby }
+    - { role: rvm_io.rvm1-ruby, tags: ruby }
 ```
 
 Let's say you want to edit a few values, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
@@ -129,15 +129,11 @@ rvm1_rvm_stable_version_number: 1.25.26
 
 ## Installation
 
-`$ ansible-galaxy install nickjj.ruby`
+`$ ansible-galaxy install rvm_io.rvm1-ruby`
 
 ## Requirements
 
 Tested on ubuntu 12.04 LTS but it should work on other versions that are similar.
-
-## Ansible galaxy
-
-You can find it on the official [ansible galaxy](https://galaxy.ansible.com/list#/roles/796) if you want to rate it.
 
 ## License
 
