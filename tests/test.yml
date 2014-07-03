@@ -13,4 +13,4 @@
     rvm1_install_path: '/home/travis/.rvm'
 
   roles:
-    - ansible-ruby
+    - rvm1-ansible

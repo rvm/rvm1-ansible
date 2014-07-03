@@ -1,4 +1,4 @@
-## What is rvm1-ansible? [![Build Status](https://secure.travis-ci.org/rvm/rvm1 -ansible.png)](http://travis-ci.org/rvm/rvm1-ansible)
+## What is rvm1-ansible? [![Build Status](https://secure.travis-ci.org/rvm/rvm1-ansible.png)](http://travis-ci.org/rvm/rvm1-ansible)
 
 It is an [ansible](http://www.ansible.com/home) role to install and manage ruby versions using rvm.
 
@@ -6,7 +6,7 @@ It is an [ansible](http://www.ansible.com/home) role to install and manage ruby 
 
 I wasn't happy with any of the solutions that existed because they required you to either compile ruby on your server or they were not idempotent. Compiling ruby on a low end VPS/instance could easily take 10 minutes and during that time your CPU is going to be pegged at 100%.
 
-ansible-ruby solves this by using rvm to install 1 or more versions of ruby. It makes installing and upgrading ruby versions very easy.
+rvm1-ansible solves this by using rvm to install 1 or more versions of ruby. It makes installing and upgrading ruby versions very easy.
 
 ## Role variables
 
