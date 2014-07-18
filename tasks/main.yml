@@ -1,6 +1,6 @@
 ---
-- name: ensure http2lib is installed
-  apt: pkg=python-http2lib state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }}
+- name: ensure httplib2 is installed
+  apt: pkg=python-httplib2 state=latest update_cache=true cache_valid_time={{ apt_cache_valid_time }}
 
 - include: 'rvm.yml'
 - include: 'rubies.yml'
