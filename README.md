@@ -12,6 +12,31 @@ rvm1-ansible solves this by using rvm to install 1 or more versions of ruby. It 
 
 `$ ansible-galaxy install rvm_io.rvm1-ruby`
 
+## Example playbook
+
+For the sake of this example let's assume you have a group called **app** and you have a typical `site.yml` file.
+
+To use this role edit your `site.yml` file to look something like this:
+
+```
+---
+- name: ensure app servers are configured
+- hosts: app
+
+  roles:
+    - { role: rvm_io.rvm1-ruby, tags: ruby }
+```
+
+Let's say you want to edit a few values, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
+
+```
+---
+rvm1_rubies:
+  - 'ruby-2.1.0'
+  - 'ruby-2.1.2'
+rvm1_rvm_stable_version_number: 1.25.26
+```
+
 ## Role variables
 
 Below is a list of default values along with a description of what they do.
@@ -108,31 +133,6 @@ The delete task is idempotent but it still requires you to make 2 edits.
 Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play book command and that version will be removed without having to manually edit your inventory.
 
 Not having to edit anything sure sounds better to me.
-
-## Example playbook
-
-For the sake of this example let's assume you have a group called **app** and you have a typical `site.yml` file.
-
-To use this role edit your `site.yml` file to look something like this:
-
-```
----
-- name: ensure app servers are configured
-- hosts: app
-
-  roles:
-    - { role: rvm_io.rvm1-ruby, tags: ruby }
-```
-
-Let's say you want to edit a few values, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
-
-```
----
-rvm1_rubies:
-  - 'ruby-2.1.0'
-  - 'ruby-2.1.2'
-rvm1_rvm_stable_version_number: 1.25.26
-```
 
 ## Requirements
 
