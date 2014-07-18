@@ -35,7 +35,7 @@
   when: not rvm_binary.stat.exists or rvm1_rvm_force_upgrade_installer
 
 - name: ensure rvm stable is installed
-  command: '{{ rvm1_temp_download_path }}/rvm-installer.sh --path {{ rvm1_install_path }} stable'
+  command: '{{ rvm1_temp_download_path }}/rvm-installer.sh --path {{ rvm1_install_path }} --auto-dotfiles stable'
   when: not rvm_binary.stat.exists
 
 - name: ensure rvm is upgraded

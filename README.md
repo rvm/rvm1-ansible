@@ -49,6 +49,9 @@ rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/
 
 # Force upgrade the rvm-installer to the latest version.
 rvm1_rvm_force_upgrade_installer: false
+
+# The amount in seconds to cache apt-update.
+apt_cache_valid_time: 86400
 ```
 
 ## Exposed variables
