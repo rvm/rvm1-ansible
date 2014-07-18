@@ -24,7 +24,11 @@ To use this role edit your `site.yml` file to look something like this:
 - hosts: app
 
   roles:
-    - { role: rvm_io.rvm1-ruby, tags: ruby }
+    # If you use the default rvm install location you must enable sudo
+    # because it will install to /usr/local/rvm.
+    #
+    # If you are installing to your user's home directory then you can drop sudo.
+    - { role: rvm_io.rvm1-ruby, tags: ruby, sudo: true }
 ```
 
 Let's say you want to edit a few values, you can do this by opening or creating `group_vars/app.yml` which is located relative to your `inventory` directory and then making it look something like this:
