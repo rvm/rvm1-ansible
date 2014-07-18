@@ -8,6 +8,10 @@ I wasn't happy with any of the solutions that existed because they required you 
 
 rvm1-ansible solves this by using rvm to install 1 or more versions of ruby. It makes installing and upgrading ruby versions very easy.
 
+## Installation
+
+`$ ansible-galaxy install rvm_io.rvm1-ruby`
+
 ## Role variables
 
 Below is a list of default values along with a description of what they do.
@@ -129,10 +133,6 @@ rvm1_rubies:
   - 'ruby-2.1.2'
 rvm1_rvm_stable_version_number: 1.25.26
 ```
-
-## Installation
-
-`$ ansible-galaxy install rvm_io.rvm1-ruby`
 
 ## Requirements
 
