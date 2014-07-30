@@ -12,7 +12,7 @@ rvm1-ansible solves this by using rvm to install 1 or more versions of ruby. It 
 
 `$ ansible-galaxy install rvm_io.rvm1-ruby`
 
-## Example playbook
+## Example playbook 
 
 For the sake of this example let's assume you have a group called **app** and you have a typical `site.yml` file.
 
@@ -21,7 +21,7 @@ To use this role edit your `site.yml` file to look something like this:
 ```
 ---
 - name: ensure app servers are configured
-- hosts: app
+  hosts: app
 
   roles:
     # If you use the default rvm install location you must enable sudo
@@ -35,10 +35,21 @@ Let's say you want to edit a few values, you can do this by opening or creating 
 
 ```
 ---
+# Let's install rvm locally to a user and install multiple versions of ruby.
+
+# We can dump the rvm install script to /tmp.
+rvm1_temp_download_path: '/tmp'
+
+# If you're going to use the ~ shortcut and you have sudo enabled then make sure
+# you set sudo_user on the role to the correct user or it will be root.
+# ie. { role: rvm_io.rvm1-ruby, tags: ruby, sudo: true, sudo_user: '{{ rvm1_user }}' }
+
+# Another option is just to not set sudo for the rvm role at all.
+rvm1_install_path: '~/.rvm'
+
 rvm1_rubies:
   - 'ruby-2.1.0'
   - 'ruby-2.1.2'
-rvm1_rvm_stable_version_number: 1.25.26
 ```
 
 ## Role variables
