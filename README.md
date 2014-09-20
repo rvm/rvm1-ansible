@@ -67,7 +67,7 @@ apt_cache_valid_time: 86400
 #### System wide installation
 
 The above example would setup ruby system wide. It's very important that you
-run the play with sudo because it will need to write to `/usr/local/rvm`.
+run the play with sudo because it will need to write to `/usr/local/lib/rvm`.
 
 #### To the same user as `ansible_ssh_user`
 
