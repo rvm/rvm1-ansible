@@ -9,7 +9,7 @@
   register: rvm_installer
 
 - name: Detect current rvm version
-  command: '{{ rvm1_install_path }} version'
+  command: '{{ rvm1_rvm}} version'
   changed_when: False
   register: rvm_current_version
   when: rvm_binary.stat.exists
