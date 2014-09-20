@@ -7,7 +7,6 @@ env:
 
 before_install:
   - '__rvm_unload ; rm -rf ~/.rvm'
-  - 'sudo usermod -G audio travis'
 
 install:
   - 'pip install ansible==1.7.1'
@@ -36,11 +35,6 @@ script:
     | grep -q 'ruby-2.1.0'
     && (echo 'Multiple rubies test: pass' && exit 0)
     || (echo 'Multiple rubies test: fail' && exit 1)
-  - >
-    ls -l ~/.rvm
-    | grep -q 'travis audio'
-    && (echo 'Ownership test: pass' && exit 0)
-    || (echo 'Ownership test: fail' && exit 1)
   - >
     ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=ruby-2.1.0'
     | grep -q 'ok=1.*failed=0'
