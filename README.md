@@ -79,8 +79,7 @@ rvm1_temp_download_path: '/usr/local/src'
 # Where should rvm be installed to?
 rvm1_install_path: '/usr/local/rvm'
 
-# Which url or local path contains the rvm-installer script?
-# If you use a url, it must include http:// or https:// at the start.
+# Which url contains the rvm-installer script?
 rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
 
 # Which url or value contains the stable version number of rvm?
@@ -92,7 +91,7 @@ rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/m
 rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
 
 # Force upgrade the rvm-installer to the latest version.
-rvm1_rvm_force_upgrade_installer: false
+rvm1_rvm_force_upgrade_installer: False
 
 # The amount in seconds to cache apt-update.
 apt_cache_valid_time: 86400

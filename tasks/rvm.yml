@@ -1,47 +1,50 @@
 ---
-- name: detect rvm binary
+
+- name: Detect rvm binary
   stat: path='{{ rvm1 }}'
   register: rvm_binary
 
-- name: detect rvm installer
+- name: Detect rvm installer
   stat: path='{{ rvm1_temp_download_path }}/rvm-installer.sh'
   register: rvm_installer
 
-- name: detect current rvm version
+- name: Detect current rvm version
   command: '{{ rvm1 }} version'
-  changed_when: false
+  changed_when: False
   register: rvm_current_version
   when: rvm_binary.stat.exists
 
-- name: detect stable rvm version from url
-  uri: url='{{ rvm1_rvm_stable_version_number }}' return_content=yes
+- name: Detect stable rvm version
+  uri:
+    url: '{{ rvm1_rvm_stable_version_number }}'
+    return_content: True
   register: rvm_stable_version_number
   when: '"://" in rvm1_rvm_stable_version_number'
 
-- name: ensure rvm installer is copied from url
+- name: Install rvm installer
   get_url:
     url: '{{ rvm1_rvm_latest_installer }}'
     dest: '{{ rvm1_temp_download_path }}/rvm-installer.sh'
-  when: '"://" in rvm1_rvm_latest_installer and not rvm_installer.stat.exists or rvm1_rvm_force_upgrade_installer'
+  when: not rvm_installer.stat.exists or rvm1_rvm_force_upgrade_installer
 
-- name: ensure rvm installer is copied from local file
-  copy: src='{{ rvm1_rvm_latest_installer }}' dest='{{ rvm1_temp_download_path }}/rvm-installer.sh'
-  when: not '://' in rvm1_rvm_latest_installer and not rvm_installer.stat.exists or rvm1_rvm_force_upgrade_installer
-
-- name: ensure rvm installer is configured
+- name: Configure rvm installer
   file:
-    path: "{{ rvm1_temp_download_path }}/rvm-installer.sh"
+    path: '{{ rvm1_temp_download_path }}/rvm-installer.sh'
     mode: 0755
   when: not rvm_binary.stat.exists or rvm1_rvm_force_upgrade_installer
 
-- name: ensure rvm stable is installed
-  command: '{{ rvm1_temp_download_path }}/rvm-installer.sh --path {{ rvm1_install_path }} --auto-dotfiles stable'
+- name: Install rvm stable
+  command: >
+    {{ rvm1_temp_download_path }}/rvm-installer.sh
+    --path {{ rvm1_install_path }}
+    --auto-dotfiles stable
   when: not rvm_binary.stat.exists
 
-- name: ensure rvm is upgraded
+- name: Update rvm
   shell: '{{ rvm1 }} get stable && {{ rvm1 }} reload'
-  when: rvm_binary.stat.exists and rvm_stable_version_number.content | default(rvm1_rvm_stable_version_number) | replace('\n', '') > rvm_current_version.stdout.split()[1]
+  when: rvm_binary.stat.exists and
+        rvm_stable_version_number.content | default(rvm1_rvm_stable_version_number) | replace('\n', '') > rvm_current_version.stdout.split()[1]
 
-- name: ensure rvm installs ruby dependencies
+- name: Configure rvm
   command: '{{ rvm1 }} autolibs 3'
   when: not rvm_binary.stat.exists

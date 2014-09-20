@@ -2,7 +2,7 @@
 rvm1_rubies:
   - 'ruby-2.1.2'
 
-rvm1_delete_ruby:
+rvm1_delete_ruby: []
 
 rvm1_user: '{{ ansible_ssh_user }}'
 rvm1_group: 'rvm'
@@ -12,6 +12,6 @@ rvm1_install_path: '/usr/local/rvm'
 
 rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
 rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
-rvm1_rvm_force_upgrade_installer: false
+rvm1_rvm_force_upgrade_installer: False
 
-apt_cache_valid_time: 86400 
+apt_cache_valid_time: 86400
