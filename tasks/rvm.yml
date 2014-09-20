@@ -1,7 +1,7 @@
 ---
 
 - name: Detect rvm binary
-  stat: path='{{ rvm1 }}'
+  stat: path='{{ rvm1_rvm }}'
   register: rvm_binary
 
 - name: Detect rvm installer
@@ -9,7 +9,7 @@
   register: rvm_installer
 
 - name: Detect current rvm version
-  command: '{{ rvm1 }} version'
+  command: '{{ rvm1_install_path }} version'
   changed_when: False
   register: rvm_current_version
   when: rvm_binary.stat.exists
@@ -35,16 +35,15 @@
 
 - name: Install rvm stable
   command: >
-    {{ rvm1_temp_download_path }}/rvm-installer.sh
-    --path {{ rvm1_install_path }}
-    --auto-dotfiles stable
+    {{ rvm1_temp_download_path }}/rvm-installer.sh stable
+    --path {{ rvm1_install_path }} {{ rvm1_install_flags }}
   when: not rvm_binary.stat.exists
 
 - name: Update rvm
-  shell: '{{ rvm1 }} get stable && {{ rvm1 }} reload'
+  shell: '{{ rvm1_rvm }} get stable && {{ rvm1_rvm }} reload'
   when: rvm_binary.stat.exists and
         rvm_stable_version_number.content | default(rvm1_rvm_stable_version_number) | replace('\n', '') > rvm_current_version.stdout.split()[1]
 
 - name: Configure rvm
-  command: '{{ rvm1 }} autolibs 3'
+  command: '{{ rvm1_rvm }} autolibs 3'
   when: not rvm_binary.stat.exists
