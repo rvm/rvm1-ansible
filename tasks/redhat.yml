@@ -4,7 +4,5 @@
   yum:
     pkg: 'python-httplib2'
     state: 'latest'
-    #update_cache: True
-    #cache_valid_time: '{{ apt_cache_valid_time }}'
   sudo: True
   sudo_user: root
