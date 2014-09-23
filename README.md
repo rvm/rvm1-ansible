@@ -75,7 +75,7 @@ You do not need to include `sudo: True` in this case, just overwrite `rvm_instal
 
 ```
 rvm1_install_flags: '--auto-dotfiles --user-install'
-rvm_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
+rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
 ```
 
 #### To a user that is not `ansible_ssh_user`
@@ -86,7 +86,7 @@ supply a different user account:
 
 ```
 rvm1_install_flags: '--auto-dotfiles --user-install'
-rvm_install_path: '/home/someuser/.rvm'
+rvm1_install_path: '/home/someuser/.rvm'
 ```
 
 ## Upgrading and removing old versions of ruby
