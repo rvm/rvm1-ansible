@@ -47,3 +47,7 @@
 - name: Configure rvm
   command: '{{ rvm1_rvm }} autolibs 3'
   when: not rvm_binary.stat.exists
+
+- name: Create symlink for profile.d script to work
+  file: src={{ rvm1_install_path }} dest=/usr/local/rvm state=link
+  when: not '--user-install' in rvm1_install_flags
