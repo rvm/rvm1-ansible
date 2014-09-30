@@ -1,13 +1,10 @@
 ---
 
-- name: Install httplib2 to use the uri module
-  apt:
-    pkg: 'python-httplib2'
-    state: 'latest'
-    update_cache: True
-    cache_valid_time: '{{ apt_cache_valid_time }}'
-  sudo: True
-  sudo_user: root
+- include: 'debian.yml'
+  when: ansible_os_family == 'Debian'
+
+- include: 'redhat.yml'
+  when: ansible_os_family == 'RedHat'
 
 - include: 'rvm.yml'
 - include: 'rubies.yml'
