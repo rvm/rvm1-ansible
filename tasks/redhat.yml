@@ -1,8 +1,0 @@
----
-
-- name: RedHat/CentOS - Install httplib2 to use the uri module
-  yum:
-    pkg: 'python-httplib2'
-    state: 'latest'
-  sudo: True
-  sudo_user: root
