@@ -40,16 +40,14 @@ rvm1_install_path: '/usr/local/lib/rvm'
 #       make sure you ADD the --user-install flag below
 rvm1_install_flags: '--auto-dotfiles'
 
-# Should rvm always be upgraded?
-rvm1_rvm_force_upgrade_installer: False
-
-# URLs for the latest installer and version
+# URL for the latest installer script
 rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
-rvm1_rvm_stable_version_number: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/VERSION'
 
-# Time in seconds before re-running apt-get update
-# This is only used to download the httplib library so Ansible's URI module works
-apt_cache_valid_time: 86400
+# rvm version to use
+rvm1_rvm_version: 'stable'
+
+# Check and update rvm, disabling this will force rvm to never update
+rvm1_rvm_check_for_updates: True
 ```
 
 ## Example playbook
