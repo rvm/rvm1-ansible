@@ -23,3 +23,9 @@ rvm1_rvm_version: 'stable'
 
 # Check and update rvm, disabling this will force rvm to never update
 rvm1_rvm_check_for_updates: True
+
+# GPG key verification, use an empty string if you want to skip this
+# Note: Unless you know what you're doing, just keep it as is
+#           Identity proof: https://keybase.io/mpapis
+#           PGP message: https://rvm.io/mpapis.asc
+rvm1_gpg_keys: 'D39DC0E3'
