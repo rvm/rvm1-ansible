@@ -28,6 +28,7 @@
 
 - name: Import GPG keys
   command: 'gpg --keyserver hkp://keys.gnupg.net --recv-keys {{ rvm1_gpg_keys }}'
+  changed_when: False
   when: not rvm_binary.stat.exists
   changed_when: False
 
