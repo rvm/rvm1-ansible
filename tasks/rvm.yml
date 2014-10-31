@@ -27,7 +27,7 @@
   when: not rvm_binary.stat.exists
 
 - name: Import GPG keys
-  command: 'gpg --keyserver hkp://keys.gnupg.net --recv-keys {{ rvm1_gpg_keys }}'
+  command: 'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
   when: not rvm_binary.stat.exists and rvm1_gpg_keys
 
