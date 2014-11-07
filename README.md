@@ -54,6 +54,9 @@ rvm1_rvm_check_for_updates: True
 #           Identity proof: https://keybase.io/mpapis
 #           PGP message: https://rvm.io/mpapis.asc
 rvm1_gpg_keys: 'D39DC0E3'
+
+# The GPG key server
+rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 ```
 
 ## Example playbook
