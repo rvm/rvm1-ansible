@@ -29,7 +29,7 @@
 - name: Import GPG keys
   command: 'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
-  when: rvm1_gpg_keys
+  when: rvm1_gpg_keys != ''
 
 - name: Install rvm
   command: >
