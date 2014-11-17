@@ -1,4 +1,10 @@
 ---
 
 - include: 'rvm.yml'
+  tags:
+    - rvm_io
+    - rvm_io_rvm
 - include: 'rubies.yml'
+  tags:
+    - rvm_io
+    - rvm_io_rubies
