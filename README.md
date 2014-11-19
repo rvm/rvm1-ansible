@@ -78,7 +78,11 @@ run the play with sudo because it will need to write to `/usr/local/lib/rvm`.
 
 #### To the same user as `ansible_ssh_user`
 
-You do not need to include `sudo: True` in this case, just overwrite `rvm_install_path` and set the `--user-install` flag:
+In this case, just overwrite `rvm_install_path` and set the `--user-install` flag:
+
+**Note:** you still need to use sudo because during the ruby
+  installation phase rvm will internally make calls using sudo
+  to install certain ruby dependencies.
 
 ```
 rvm1_install_flags: '--auto-dotfiles --user-install'
