@@ -33,7 +33,7 @@ rvm1_rubies:
 rvm1_delete_ruby:
 
 # Install path for rvm (defaults to system wide)
-rvm1_install_path: '/usr/local/lib/rvm'
+rvm1_install_path: '/usr/local/rvm'
 
 # Add or remove any install flags
 # NOTE: If you are doing a USER BASED INSTALL then
@@ -74,7 +74,7 @@ rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 #### System wide installation
 
 The above example would setup ruby system wide. It's very important that you
-run the play with sudo because it will need to write to `/usr/local/lib/rvm`.
+run the play with sudo because it will need to write to `/usr/local/rvm`.
 
 #### To the same user as `ansible_ssh_user`
 
