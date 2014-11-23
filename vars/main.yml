@@ -19,6 +19,3 @@ rvm1_symlink_binaries:
   - 'ruby'
   - 'testrb'
 
-rvm1_symlink_to: '/usr/local/bin'
-rvm1_symlink_user: 'root'
-rvm1_symlink_group: 'root'

@@ -32,3 +32,7 @@ rvm1_gpg_keys: 'D39DC0E3'
 
 # The GPG key server
 rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
+
+rvm1_symlink_to: '/usr/local/bin'
+rvm1_symlink_user: 'root'
+rvm1_symlink_group: 'root'
