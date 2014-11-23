@@ -57,6 +57,10 @@ rvm1_gpg_keys: 'D39DC0E3'
 
 # The GPG key server
 rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
+
+rvm1_symlink_to: '/usr/local/bin'
+rvm1_symlink_user: 'root'
+rvm1_symlink_group: 'root'
 ```
 
 ## Example playbook
@@ -78,12 +82,17 @@ run the play with sudo because it will need to write to `/usr/local/lib/rvm`.
 
 #### To the same user as `ansible_ssh_user`
 
-You do not need to include `sudo: True` in this case, just overwrite `rvm_install_path` and set the `--user-install` flag:
+You do not need to include `sudo: True` in this case, just overwrite `rvm_install_path`; set the `--user-install` flag; configure the symlink location; and define ownerships of the symlinks:
 
 ```
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
+rvm1_symlink_to: '/usr/{{ansible_ssh_user}}/.rvm/bin'
+rvm1_symlink_user: '{{ansible_ssh_user}}'
+rvm1_symlink_group: '{{ansible_ssh_user}}'
 ```
+
+Failing to set the symlink user/group combination will cause the Playbook to fail (due to the default value being 'root')
 
 #### To a user that is not `ansible_ssh_user`
 
@@ -94,6 +103,9 @@ supply a different user account:
 ```
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/someuser/.rvm'
+rvm1_symlink_to: '/home/someuser/.rvm/bin'
+rvm1_symlink_user: 'someuser'
+rvm1_symlink_group: 'someuser'
 ```
 
 ## Upgrading and removing old versions of ruby
