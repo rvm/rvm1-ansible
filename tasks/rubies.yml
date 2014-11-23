@@ -28,9 +28,8 @@
     state: 'link'
     src: '{{ rvm1_install_path }}/wrappers/default/{{ item }}'
     dest: '{{ rvm1_symlink_to }}/{{ item }}'
-    owner: 'root'
-    group: 'root'
-  when: not '--user-install' in rvm1_install_flags
+    owner: '{{ rvm1_symlink_user }}'
+    group: '{{ rvm1_symlink_group }}'
   with_items: rvm1_symlink_binaries
 
 - name: Detect if ruby version can be deleted
