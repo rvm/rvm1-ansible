@@ -10,6 +10,9 @@ rvm1_delete_ruby:
 # Install path for rvm (defaults to system wide)
 rvm1_install_path: '/usr/local/rvm'
 
+# User of the installation directory that will be granted with ownership permissions
+rvm1_install_owner: ''
+
 # Add or remove any install flags
 # NOTE: If you are doing a USER BASED INSTALL then
 #       make sure you ADD the --user-install flag below

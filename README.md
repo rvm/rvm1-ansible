@@ -100,6 +100,15 @@ rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/someuser/.rvm'
 ```
 
+### Setting the ownership of the installation directory
+
+The installation directory defined in `rvm_install_path` will have as the owner the same user
+that is running the commands, in this case the `ansible_ssh_user`. If you want to grant ownership to a different user, overwite the `rvm1_install_owner`:
+
+```
+rvm1_install_owner: 'someuser'
+```
+
 ## Upgrading and removing old versions of ruby
 
 A common work flow for upgrading your ruby version would be:

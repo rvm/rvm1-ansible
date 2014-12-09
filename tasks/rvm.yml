@@ -45,3 +45,7 @@
 - name: Configure rvm
   command: '{{ rvm1_rvm }} autolibs 3'
   when: not rvm_binary.stat.exists
+
+- name: Set ownership of the installation directory
+  command:  'chown -R {{ rvm1_install_owner }} {{ rvm1_install_path }}'
+  when: rvm1_install_owner != ''
