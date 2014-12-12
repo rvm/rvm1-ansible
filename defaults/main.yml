@@ -8,7 +8,7 @@ rvm1_rubies:
 rvm1_delete_ruby:
 
 # Install path for rvm (defaults to system wide)
-rvm1_install_path: '/usr/local/lib/rvm'
+rvm1_install_path: '/usr/local/rvm'
 
 # Add or remove any install flags
 # NOTE: If you are doing a USER BASED INSTALL then
