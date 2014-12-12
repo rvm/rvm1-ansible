@@ -40,6 +40,9 @@ rvm1_install_path: '/usr/local/lib/rvm'
 #       make sure you ADD the --user-install flag below
 rvm1_install_flags: '--auto-dotfiles'
 
+# Set the owner for the rvm directory
+rvm1_user: 'root'
+
 # URL for the latest installer script
 rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
 
@@ -99,6 +102,12 @@ supply a different user account:
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/someuser/.rvm'
 ```
+
+#### A quick note about `rvm1_user`
+
+In some cases you may want the rvm folder and its files to be owned by a specific
+user instead of root. Simply set `rvm1_user: 'foo'` and when ruby gets installed
+it will ensure that `foo` owns the rvm directory.
 
 ## Upgrading and removing old versions of ruby
 
