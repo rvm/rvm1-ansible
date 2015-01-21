@@ -43,5 +43,5 @@
   when: rvm_binary.stat.exists and rvm1_rvm_check_for_updates
 
 - name: Configure rvm
-  command: '{{ rvm1_rvm }} autolibs 3'
+  command: '{{ rvm1_rvm }} autolibs {{ rvm1_autolib_mode }}'
   when: not rvm_binary.stat.exists
