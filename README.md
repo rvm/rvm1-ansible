@@ -60,6 +60,9 @@ rvm1_gpg_keys: 'D39DC0E3'
 
 # The GPG key server
 rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
+
+# autolib mode, see https://rvm.io/rvm/autolibs
+rvm1_autolib_mode: 3
 ```
 
 ## Example playbook
