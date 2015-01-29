@@ -9,7 +9,7 @@
   when: rvm1_rubies
 
 - name: Install rubies
-  command: '{{ rvm1_rvm }} install {{ item.item }}'
+  command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
   when: rvm1_rubies and item.rc != 0
   with_items: detect_rubies.results
   sudo_user: '{{ rvm1_user }}'

@@ -15,6 +15,9 @@ rvm1_install_path: '/usr/local/rvm'
 #       make sure you ADD the --user-install flag below
 rvm1_install_flags: '--auto-dotfiles'
 
+# Add additional ruby install flags
+rvm1_ruby_install_flags:
+
 # Set the owner for the rvm directory
 rvm1_user: 'root'
 
