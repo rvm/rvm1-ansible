@@ -26,6 +26,7 @@ Below is a list of default values that you can configure:
 ---
 
 # Install 1 or more versions of ruby
+# The last ruby listed will be set as the default ruby
 rvm1_rubies:
   - 'ruby-2.1.3'
 
