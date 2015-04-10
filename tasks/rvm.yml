@@ -26,10 +26,15 @@
     mode: 0755
   when: not rvm_binary.stat.exists
 
+- name: GPG key already imported?
+  command: 'gpg --list-keys {{ rvm1_gpg_keys }}'
+  register: rvm1_gpg_key_exist_output
+  ignore_errors: yes
+
 - name: Import GPG keys
   command: 'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
-  when: rvm1_gpg_keys != ''
+  when: rvm1_gpg_key_exist_output.stdout.find('{{ rvm1_gpg_keys }}') == -1
   sudo_user: '{{ rvm1_user }}'
 
 - name: Install rvm
