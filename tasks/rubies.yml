@@ -24,6 +24,7 @@
   when: detect_default_ruby_version.skipped is not defined and
         (detect_default_ruby_version.stdout == '' or
          rvm1_default_ruby_version not in detect_default_ruby_version.stdout)
+  sudo_user: '{{ rvm1_user }}'
 
 - name: Symlink ruby related binaries on the system path
   file:
@@ -34,6 +35,7 @@
     group: 'root'
   when: not '--user-install' in rvm1_install_flags
   with_items: rvm1_symlink_binaries
+  sudo_user: '{{ rvm1_user }}'
 
 - name: Detect if ruby version can be deleted
   command: '{{ rvm1_rvm }} {{ rvm1_delete_ruby }} do true'
@@ -46,3 +48,4 @@
   command: '{{ rvm1_rvm }} remove {{ rvm1_delete_ruby }}'
   changed_when: False
   when: rvm1_delete_ruby and detect_delete_ruby.rc == 0
+  sudo_user: '{{ rvm1_user }}'
