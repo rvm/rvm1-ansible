@@ -10,7 +10,7 @@
 
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
-  when: rvm1_rubies and item.rc != 0
+  when: rvm1_rubies and item.skipped is not defined and item.rc != 0
   with_items: detect_rubies.results
   sudo_user: '{{ rvm1_user }}'
 
@@ -21,8 +21,9 @@
 
 - name: Select default ruby
   command: '{{ rvm1_rvm }} alias create default {{ rvm1_default_ruby_version }}'
-  when: detect_default_ruby_version.stdout == '' or
-        rvm1_default_ruby_version not in detect_default_ruby_version.stdout
+  when: detect_default_ruby_version.skipped is not defined and
+        (detect_default_ruby_version.stdout == '' or
+         rvm1_default_ruby_version not in detect_default_ruby_version.stdout)
 
 - name: Symlink ruby related binaries on the system path
   file:
