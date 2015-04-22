@@ -24,6 +24,14 @@
   when: detect_default_ruby_version.stdout == '' or
         rvm1_default_ruby_version not in detect_default_ruby_version.stdout
 
+- name: Install bundler if not installed
+  shell: 'gem list | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item }}/gem install bundler ; fi'
+  args:
+    creates: '{{ rvm1_install_path }}/wrappers/{{ item }}/bundler'
+  with_items: rvm1_rubies
+  register: bundler_install
+  changed_when: '"Successfully installed bundler" in bundler_install.stdout'
+
 - name: Symlink ruby related binaries on the system path
   file:
     state: 'link'
