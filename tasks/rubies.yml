@@ -25,7 +25,9 @@
         rvm1_default_ruby_version not in detect_default_ruby_version.stdout
 
 - name: Install bundler if not installed
-  shell: 'gem list | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item }}/gem install bundler ; fi'
+  shell: >
+    {{ rvm1_install_path }}/wrappers/{{ item }}/gem list
+    | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item }}/gem install bundler ; fi
   args:
     creates: '{{ rvm1_install_path }}/wrappers/{{ item }}/bundler'
   with_items: rvm1_rubies
