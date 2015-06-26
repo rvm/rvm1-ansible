@@ -41,6 +41,7 @@
     dest: '{{ rvm1_symlink_to }}/{{ item }}'
     owner: 'root'
     group: 'root'
+    force: yes
   when: not '--user-install' in rvm1_install_flags
   with_items: rvm1_symlink_binaries
 
