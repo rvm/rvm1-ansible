@@ -1,5 +1,8 @@
 ---
 
+- name: Add Key manually as otherwise key import can fail in some situations
+  shell: curl -sSL https://rvm.io/mpapis.asc | sudo gpg2 --import -
+
 - name: Detect rvm binary
   stat: path='{{ rvm1_rvm }}'
   register: rvm_binary
