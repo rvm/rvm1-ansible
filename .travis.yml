@@ -2,6 +2,8 @@
 language: 'python'
 python: '2.7'
 
+sudo: required
+
 env:
   - SITE_AND_INVENTORY='tests/test.yml -i tests/inventory'
 
@@ -35,6 +37,11 @@ script:
     | grep -q 'ruby-2.1.0'
     && (echo 'Multiple rubies test: pass' && exit 0)
     || (echo 'Multiple rubies test: fail' && exit 1)
+  - >
+    ~/.rvm/wrappers/ruby-2.1.2/bundle -v
+    | grep -q 'Bundler version'
+    && (echo 'Bundler setup test: pass' && exit 0)
+    || (echo 'Bundler setup test: fail' && exit 1)
   - >
     ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=ruby-2.1.0'
     | grep -q 'ok=1.*failed=0'
