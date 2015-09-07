@@ -42,3 +42,10 @@ rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
+
+# Update $rvm_path/config/db, see https://rvm.io/rvm/configuration
+# e.g
+# rvm1_configurations:
+#   ruby_url: http://ruby.taobao.org/mirrors/ruby
+# 
+rvm1_configurations: {}
