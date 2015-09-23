@@ -24,13 +24,20 @@
   when: detect_default_ruby_version.stdout == '' or
         rvm1_default_ruby_version not in detect_default_ruby_version.stdout
 
+- name: Detect installed ruby patch number
+  shell: >
+    {{ rvm1_rvm }} list strings | grep {{ item }}
+  with_items: rvm1_rubies
+  changed_when: False
+  register: ruby_patch
+
 - name: Install bundler if not installed
   shell: >
-    {{ rvm1_install_path }}/wrappers/{{ item }}/gem list
-    | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item }}/gem install bundler ; fi
+    {{ rvm1_install_path }}/wrappers/{{ item.stdout }}/gem list
+    | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item.stdout }}/gem install bundler ; fi
   args:
-    creates: '{{ rvm1_install_path }}/wrappers/{{ item }}/bundler'
-  with_items: rvm1_rubies
+    creates: '{{ rvm1_install_path }}/wrappers/{{ item.stdout }}/bundler'
+  with_items: ruby_patch.results
   register: bundler_install
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
 
