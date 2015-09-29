@@ -45,3 +45,8 @@ script:
     | grep -q '2'
     && (echo 'Really deleted ruby test: pass' && exit 0)
     || (echo 'Really deleted ruby test: fail' && exit 1)
+  - >
+    rvm
+    | grep -q 'rvm'
+    && (echo 'No rvm test: pass' && exit 1)
+    || (echo 'No rvm test: fail' && exit 0)
