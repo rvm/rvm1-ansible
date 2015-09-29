@@ -48,5 +48,5 @@ script:
   - >
     rvm
     | grep -q 'rvm'
-    && (echo 'No rvm test: pass' && exit 1)
-    || (echo 'No rvm test: fail' && exit 0)
+    && (echo 'No rvm test: pass' && exit 0)
+    || (echo 'No rvm test: fail' && exit 1)
