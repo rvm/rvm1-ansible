@@ -26,10 +26,10 @@
 
 - name: Install bundler if not installed
   shell: >
-    {{ rvm1_install_path }}/wrappers/{{ item }}/gem list
-    | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item }}/gem install bundler ; fi
+    {{ rvm1_install_path }}/wrappers/{{ item }}@global/gem list
+    | if ! grep "^bundler " ; then {{ rvm1_install_path }}/wrappers/{{ item }}@global/gem install bundler ; fi
   args:
-    creates: '{{ rvm1_install_path }}/wrappers/{{ item }}/bundler'
+    creates: '{{ rvm1_install_path }}/wrappers/{{ item }}@global/bundler'
   with_items: rvm1_rubies
   register: bundler_install
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
