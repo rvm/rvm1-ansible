@@ -45,3 +45,8 @@ script:
     | grep -q '2'
     && (echo 'Really deleted ruby test: pass' && exit 0)
     || (echo 'Really deleted ruby test: fail' && exit 1)
+  - >
+    ls ~/.rvm/wrappers/default/
+    | grep -q 'bundler'
+    && (echo 'Bundler symlinked on system path test: pass' && exit 0)
+    || (echo 'Bundler symlinked on system path test: fail' && exit 1)
