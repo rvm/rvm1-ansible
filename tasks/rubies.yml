@@ -10,7 +10,7 @@
 
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
-  when: rvm1_rubies and item.rc != 0
+  when: rvm1_rubies and item.rc|default(0) != 0
   with_items: detect_rubies.results
   sudo_user: '{{ rvm1_user }}'
 
@@ -21,7 +21,7 @@
 
 - name: Select default ruby
   command: '{{ rvm1_rvm }} alias create default {{ rvm1_default_ruby_version }}'
-  when: detect_default_ruby_version.stdout == '' or
+  when: detect_default_ruby_version.stdout|default() == '' or
         rvm1_default_ruby_version not in detect_default_ruby_version.stdout
 
 - name: Detect installed ruby patch number
@@ -30,6 +30,7 @@
   with_items: rvm1_rubies
   changed_when: False
   register: ruby_patch
+  always_run: yes # Run even when in --check mode (http://docs.ansible.com/ansible/playbooks_checkmode.html)
 
 - name: Install bundler if not installed
   shell: >
@@ -40,7 +41,7 @@
   with_items: ruby_patch.results
   register: bundler_install
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
-
+  
 - name: Symlink ruby related binaries on the system path
   file:
     state: 'link'
@@ -50,7 +51,7 @@
     group: 'root'
   when: not '--user-install' in rvm1_install_flags
   with_items: rvm1_symlink_binaries
-
+  
 - name: Detect if ruby version can be deleted
   command: '{{ rvm1_rvm }} {{ rvm1_delete_ruby }} do true'
   changed_when: False
