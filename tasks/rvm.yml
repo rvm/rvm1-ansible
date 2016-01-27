@@ -49,3 +49,13 @@
   command: '{{ rvm1_rvm }} autolibs {{ rvm1_autolib_mode }}'
   when: not rvm_binary.stat.exists
   sudo_user: '{{ rvm1_user }}'
+
+- name: Update rvm configuration db
+  lineinfile: "dest={{ rvm1_install_path }}/config/db state=present regexp='^{{ item }}=' line='{{ item }}={{ rvm1_configurations[item] }}'"
+  with_items: rvm1_configurations.keys()
+
+- name: Reload rvm when configuration db updated
+  shell: '{{ rvm1_rvm }} reload'
+  changed_when: False
+  when: rvm1_configurations.keys()
+  sudo_user: '{{ rvm1_user }}'
