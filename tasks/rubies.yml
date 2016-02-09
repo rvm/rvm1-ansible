@@ -18,11 +18,13 @@
   command: '{{ rvm1_rvm }} alias list default'
   changed_when: False
   register: detect_default_ruby_version
+  sudo_user: '{{ rvm1_user }}'
 
 - name: Select default ruby
   command: '{{ rvm1_rvm }} alias create default {{ rvm1_default_ruby_version }}'
   when: detect_default_ruby_version.stdout|default() == '' or
         rvm1_default_ruby_version not in detect_default_ruby_version.stdout
+  sudo_user: '{{ rvm1_user }}'
 
 - name: Detect installed ruby patch number
   shell: >
@@ -31,6 +33,7 @@
   changed_when: False
   register: ruby_patch
   always_run: yes # Run even when in --check mode (http://docs.ansible.com/ansible/playbooks_checkmode.html)
+  sudo_user: '{{ rvm1_user }}'
 
 - name: Install bundler if not installed
   shell: >
@@ -41,6 +44,7 @@
   with_items: ruby_patch.results
   register: bundler_install
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
+  sudo_user: '{{ rvm1_user }}'
   
 - name: Symlink ruby related binaries on the system path
   file:
