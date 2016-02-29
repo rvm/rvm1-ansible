@@ -78,7 +78,7 @@ rvm1_autolib_mode: 3
   hosts: all
 
   roles:
-    - { role: rvm_io.rvm1-ruby, tags: ruby, sudo: True }
+    - { role: rvm_io.rvm1-ruby, tags: ruby, become: True }
 ```
 
 #### System wide installation
