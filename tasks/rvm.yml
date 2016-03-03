@@ -32,6 +32,10 @@
   when: rvm1_gpg_keys != ''
   become: yes
   become_user: '{{ rvm1_user }}'
+  register: result
+  until: result.rc == 0
+  retries: 5
+  delay: 5
 
 - name: Install rvm
   command: >
