@@ -67,8 +67,12 @@
   failed_when: False
   register: detect_delete_ruby
   when: rvm1_delete_ruby
+  become: yes
+  become_user: '{{ rvm1_user }}'
 
 - name: Delete ruby version
   command: '{{ rvm1_rvm }} remove {{ rvm1_delete_ruby }}'
   changed_when: False
   when: rvm1_delete_ruby and detect_delete_ruby.rc == 0
+  become: yes
+  become_user: '{{ rvm1_user }}'
