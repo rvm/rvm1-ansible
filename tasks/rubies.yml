@@ -19,7 +19,8 @@
   command: '{{ rvm1_rvm }} alias list default'
   changed_when: False
   register: detect_default_ruby_version
-  sudo_user: '{{ rvm1_user }}'
+  become: yes
+  become_user: '{{ rvm1_user }}'
 
 - name: Select default ruby
   command: '{{ rvm1_rvm }} alias create default {{ rvm1_default_ruby_version }}'
