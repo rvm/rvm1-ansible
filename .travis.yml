@@ -27,16 +27,16 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
   - >
     ~/.rvm/wrappers/default/ruby -v
-    | grep -q '2.1.2'
+    | grep -q '2.2.3'
     && (echo 'Default ruby test: pass' && exit 0)
     || (echo 'Default ruby test: fail' && exit 1)
   - >
     ls ~/.rvm/rubies
-    | grep -q 'ruby-2.1.0'
+    | grep -q 'ruby-2.1.7'
     && (echo 'Multiple rubies test: pass' && exit 0)
     || (echo 'Multiple rubies test: fail' && exit 1)
   - >
-    ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=ruby-2.1.0'
+    ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=ruby-2.1.7'
     | grep -q 'ok=1.*failed=0'
     && (echo 'Delete ruby test: pass' && exit 0)
     || (echo 'Delete ruby test: fail' && exit 1)

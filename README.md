@@ -28,9 +28,9 @@ Below is a list of default values that you can configure:
 # Install 1 or more versions of ruby
 # The last ruby listed will be set as the default ruby
 rvm1_rubies:
-  - 'ruby-2.1.3'
+  - 'ruby-2.2.3'
 
-# Delete a specific version of ruby (ie. ruby-2.1.0)
+# Delete a specific version of ruby (ie. ruby-2.2.0)
 rvm1_delete_ruby:
 
 # Install path for rvm (defaults to system wide)
@@ -126,7 +126,7 @@ A common work flow for upgrading your ruby version would be:
 
 ### Leverage ansible's `--extra-vars`
 
-Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play book command and that version will be removed.
+Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.2.0'` to the end of your play book command and that version will be removed.
 
 ## Requirements
 
