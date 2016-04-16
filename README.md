@@ -67,6 +67,13 @@ rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
+
+# Update $rvm_path/user/db, see https://rvm.io/rvm/configuration
+# e.g
+# rvm1_configurations:
+#   ruby_url: https://example.com/mirrors/ruby
+#
+rvm1_configurations: {}
 ```
 
 ## Example playbook
