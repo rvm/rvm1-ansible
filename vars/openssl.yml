@@ -1,0 +1,5 @@
+﻿---
+
+# Prefer the version of libssl/openssl provideded by
+# the distro
+rvm1_install_openssl: False
