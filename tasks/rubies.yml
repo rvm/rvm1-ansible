@@ -54,7 +54,6 @@
     rvm1_install_openssl is defined and
     rvm1_install_openssl == True
   with_items: '{{ detect_rubies.results }}'
-  sudo_user: '{{ rvm1_user }}'
 
 - debug:
     msg:
@@ -62,11 +61,11 @@
 
 - name: Install rvm pkg install openssl
   command: '{{ rvm1_rvm }} pkg install openssl'
-  sudo: true
   when:
     detect_rvm_openssl_pkg.stat.exists == False and
     rvm1_install_openssl is defined and
     rvm1_install_openssl == True
+  become: true
 
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
