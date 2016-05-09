@@ -12,7 +12,7 @@
 - name: Determine distribution_release
   shell: awk -F/ '{print $1}' /etc/debian_version
   register: distribution_release
-  when: 
+  when:
     ansible_distribution == 'Debian' and
     ansible_distribution_release == 'NA'
   always_run: yes
@@ -37,33 +37,33 @@
 
 # Appears we have to test a file as rvm has no way to list packages it installed
 - name: Determine if rvm pkg openssl is installed
-  stat: 
+  stat:
     path: '{{ rvm1_install_path }}/usr/ssl/openssl.cnf'
   ignore_errors: True
-  when: 
+  when:
     rvm1_install_openssl is defined and
     rvm1_install_openssl == True
   register: detect_rvm_openssl_pkg
 
-- name: Add --with-openssl-dir to rvm1_install_flags 
-  set_fact: 
+- name: Add --with-openssl-dir to rvm1_install_flags
+  set_fact:
     rvm1_ruby_install_flags='--with-openssl-dir={{ rvm1_install_path }}/usr {{ rvm1_ruby_install_flags }}'
     #'
-  when: 
+  when:
     (rvm1_rubies and item.rc|default(0) != 0) and
     rvm1_install_openssl is defined and
     rvm1_install_openssl == True
   with_items: '{{ detect_rubies.results }}'
   sudo_user: '{{ rvm1_user }}'
 
-- debug: 
+- debug:
     msg:
       "rvm1_ruby_install_flags => '{{ rvm1_ruby_install_flags }}'"
 
 - name: Install rvm pkg install openssl
   command: '{{ rvm1_rvm }} pkg install openssl'
   sudo: true
-  when: 
+  when:
     detect_rvm_openssl_pkg.stat.exists == False and
     rvm1_install_openssl is defined and
     rvm1_install_openssl == True
@@ -110,7 +110,7 @@
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
   become: yes
   become_user: '{{ rvm1_user }}'
-  
+
 - name: Symlink ruby related binaries on the system path
   file:
     state: 'link'
@@ -120,7 +120,7 @@
     group: 'root'
   when: not '--user-install' in rvm1_install_flags
   with_items: '{{ rvm1_symlink_binaries }}'
-  
+
 - name: Detect if ruby version can be deleted
   command: '{{ rvm1_rvm }} {{ rvm1_delete_ruby }} do true'
   changed_when: False

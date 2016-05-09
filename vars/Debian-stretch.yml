@@ -1,7 +1,7 @@
-﻿---
+---
 
-# workaround for debian stretch where the ruby build 
-# fails with an incompatibility with libssl/openssl (1.0.2) 
+# workaround for debian stretch where the ruby build
+# fails with an incompatibility with libssl/openssl (1.0.2)
 # provided by debian.
 
 # Allow for rvm to install openssl
