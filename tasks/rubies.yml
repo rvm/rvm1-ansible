@@ -28,12 +28,14 @@
   tags:
     - apt
 
+# Allow for distro-specific overrides
+# e.g. to allow for rvm to install openssl on Debian stretch/testing
+#      - ruby fails to build with openssl 1.0.2
 - name: Include distribution release specific variables
   include_vars: '{{ item }}'
   with_first_found:
     - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
     - "openssl.yml"
-  # when: release_vars.stat.exists == True
 
 # Appears we have to test a file as rvm has no way to list packages it installed
 - name: Determine if rvm pkg openssl is installed
