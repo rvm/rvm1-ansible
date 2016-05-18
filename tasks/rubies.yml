@@ -137,3 +137,51 @@
   when: rvm1_delete_ruby and detect_delete_ruby.rc == 0
   become: yes
   become_user: '{{ rvm1_user }}'
+
+- name: Set user ownership of content under rvm1_install_path
+  shell:
+    find '{{ rvm1_install_path }}'
+      \( -iname ".git" -prune \) -o
+      ! -user '{{ item }}'
+      -exec chown -v '{{ item }}' {} + | head -n 1
+  become: yes
+  with_items: '{{ rvm1_install_path_user }}'
+  when:
+    - rvm1_install_path_user is defined
+    - rvm1_install_path_user != None
+  register: rvm1_chown
+  changed_when: '"changed group" in rvm1_chown.stdout'
+  tags:
+    - rvm
+
+- name: Set group ownership of content under rvm1_install_path
+  shell:
+    find '{{ rvm1_install_path }}'
+      \( -iname ".git" -prune \) -o
+      ! -group '{{ item }}'
+      -exec chgrp -v '{{ item }}' {} + | head -n 1
+  become: yes
+  with_items: '{{ rvm1_install_path_group }}'
+  when:
+    - rvm1_install_path_group is defined
+    - rvm1_install_path_group != None
+  register: rvm1_chgrp
+  changed_when: '"changed group" in rvm1_chgrp.stdout'
+  tags:
+    - rvm
+
+- name: Set group permissions of content under rvm1_install_path
+  shell:
+    find '{{ rvm1_install_path }}'
+      \( -iname ".git" -prune \) -o
+      -type d ! -perm -g+s
+      -exec chmod -v g+rwxs {} + | head -n 1
+  become: yes
+  when:
+    - rvm1_install_path_group is defined
+    - rvm1_install_path_group != None
+  register: rvm1_chmod
+  changed_when: '"changed from" in rvm1_chmod.stdout'
+  tags:
+    - rvm
+
