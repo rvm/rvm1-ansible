@@ -53,3 +53,16 @@
   when: not rvm_binary.stat.exists
   become: yes
   become_user: '{{ rvm1_user }}'
+
+- name: Change rvm user/db
+  lineinfile: "dest={{ rvm1_install_path }}/user/db state=present regexp='^{{ item }}=' line='{{ item }}={{ rvm1_configurations[item] }}'"
+  with_items: rvm1_configurations.keys()
+  become: yes
+  become_user: '{{ rvm1_user }}'
+
+- name: Reload rvm when user/db Changed
+  shell: '{{ rvm1_rvm }} reload'
+  changed_when: False
+  when: rvm1_configurations.keys()
+  become: yes
+  become_user: '{{ rvm1_user }}'
