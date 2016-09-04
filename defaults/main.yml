@@ -42,3 +42,9 @@ rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
+
+# Name of UID 0 user
+root_user: 'root'
+
+# Name of GID 0 group -- BSD systems typically use wheel
+root_group: 'root'
