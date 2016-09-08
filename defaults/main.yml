@@ -46,5 +46,5 @@ rvm1_autolib_mode: 3
 # Name of UID 0 user
 root_user: 'root'
 
-# Name of GID 0 group -- BSD systems typically use wheel
-root_group: 'root'
+# Name of GID 0 group -- BSD systems typically use wheel instead of root
+root_group: '{{ root_user }}'
