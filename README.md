@@ -69,9 +69,9 @@ rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 rvm1_autolib_mode: 3
 ```
 
-## Example playbook
+## Example playbooks
 
-```
+```yaml
 ---
 
 - name: Configure servers with ruby support
@@ -79,6 +79,17 @@ rvm1_autolib_mode: 3
 
   roles:
     - { role: rvm_io.rvm1-ruby, tags: ruby, become: yes }
+```
+If you need to pass a list of ruby versions, pass it in an array like so. 
+
+```yaml
+---
+- hosts: all
+  roles:
+    - { role: rvm_io.rvm1-ruby,
+        tags: ruby,
+        rvm1_rubies: ['ruby-2.2.2','ruby-2.2.5'],
+      }
 ```
 
 #### System wide installation
