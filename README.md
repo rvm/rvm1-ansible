@@ -22,7 +22,7 @@ using a version manager while still benefiting from what rvm has to offer.
 
 Below is a list of default values that you can configure:
 
-```
+```yaml
 ---
 
 # Install 1 or more versions of ruby
@@ -91,6 +91,9 @@ If you need to pass a list of ruby versions, pass it in an array like so.
         rvm1_rubies: ['ruby-2.2.2','ruby-2.2.5'],
       }
 ```
+_rvm_rubies must be specified via `ruby-x.x.x` so that if you want_
+_ruby 2.2.3, you will need to pass in an array **rvm_rubies: ['ruby-2.2.2']**_
+
 
 #### System wide installation
 
@@ -105,7 +108,7 @@ In this case, just overwrite `rvm_install_path` and set the `--user-install` fla
   installation phase rvm will internally make calls using sudo
   to install certain ruby dependencies.
 
-```
+```yaml
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
 ```
@@ -116,7 +119,7 @@ You **will need sudo here** because you will be writing outside the ansible
 user's home directory. Other than that it's the same as above, except you will
 supply a different user account:
 
-```
+```yaml
 rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/someuser/.rvm'
 ```
@@ -142,7 +145,7 @@ Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play bo
 ## Requirements
 
 - Tested on ubuntu 12.04 LTS but it should work on other versions that are similar.
-- Tested on RHEL6.5 and CentOS 6.5
+- Tested on RHEL6.5 and CentOS [6.5, 6.6, 6.7]
 
 ## Ansible galaxy
 
