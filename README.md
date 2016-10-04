@@ -92,7 +92,7 @@ If you need to pass a list of ruby versions, pass it in an array like so.
       }
 ```
 _rvm_rubies must be specified via `ruby-x.x.x` so that if you want_
-_ruby 2.2.3, you will need to pass in an array **rvm_rubies: ['ruby-2.2.2']**_
+_ruby 2.2.2, you will need to pass in an array **rvm_rubies: ['ruby-2.2.2']**_
 
 
 #### System wide installation
