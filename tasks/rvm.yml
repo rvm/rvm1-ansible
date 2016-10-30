@@ -26,10 +26,18 @@
     mode: 0755
   when: not rvm_binary.stat.exists
 
+- name: Determine if rvm gpg signing keys are installed
+  shell:
+    gpg --list-keys '{{ rvm1_gpg_keys }}'
+  always_run: yes
+  ignore_errors: True
+  register: rvm_signing_keys_exist
+
 - name: Import GPG keys
-  command: 'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
+  command:
+    'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
-  when: rvm1_gpg_keys != ''
+  when: (rvm1_gpg_keys != '') and (rvm_signing_keys_exist.rc != 0)
   become: yes
   become_user: '{{ rvm1_user }}'
   register: result

@@ -8,6 +8,67 @@
   with_items: '{{ rvm1_rubies }}'
   when: rvm1_rubies
 
+# Workaround for debian testing where ansible is unable to divine the release
+- name: Determine distribution_release
+  shell: awk -F/ '{print $1}' /etc/debian_version
+  register: distribution_release
+  when:
+    ansible_distribution == 'Debian' and
+    ansible_distribution_release == 'NA'
+  always_run: yes
+  tags:
+    - apt
+
+- name: Set ansible_distribution_release
+  set_fact: 'ansible_distribution_release="{{ distribution_release.stdout }}"'
+  when:
+    ansible_distribution == 'Debian' and
+    ansible_distribution_release == 'NA'
+  always_run: yes
+  tags:
+    - apt
+
+# Allow for distro-specific overrides
+# e.g. to allow for rvm to install openssl on Debian stretch/testing
+#      - ruby fails to build with openssl 1.0.2
+- name: Include distribution release specific variables
+  include_vars: '{{ item }}'
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
+    - "openssl.yml"
+
+# Appears we have to test a file as rvm has no way to list packages it installed
+- name: Determine if rvm pkg openssl is installed
+  stat:
+    path: '{{ rvm1_install_path }}/usr/ssl/openssl.cnf'
+  ignore_errors: True
+  when:
+    rvm1_install_openssl is defined and
+    rvm1_install_openssl == True
+  register: detect_rvm_openssl_pkg
+
+- name: Add --with-openssl-dir to rvm1_install_flags
+  set_fact:
+    rvm1_ruby_install_flags='--with-openssl-dir={{ rvm1_install_path }}/usr {{ rvm1_ruby_install_flags }}'
+    #'
+  when:
+    (rvm1_rubies and item.rc|default(0) != 0) and
+    rvm1_install_openssl is defined and
+    rvm1_install_openssl == True
+  with_items: '{{ detect_rubies.results }}'
+
+- debug:
+    msg:
+      "rvm1_ruby_install_flags => '{{ rvm1_ruby_install_flags }}'"
+
+- name: Install rvm pkg install openssl
+  command: '{{ rvm1_rvm }} pkg install openssl'
+  when:
+    detect_rvm_openssl_pkg.stat.exists == False and
+    rvm1_install_openssl is defined and
+    rvm1_install_openssl == True
+  become: true
+
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
   when: rvm1_rubies and item.rc|default(0) != 0
@@ -76,3 +137,51 @@
   when: rvm1_delete_ruby and detect_delete_ruby.rc == 0
   become: yes
   become_user: '{{ rvm1_user }}'
+
+- name: Set user ownership of content under rvm1_install_path
+  shell:
+    find '{{ rvm1_install_path }}'
+      \( -iname ".git" -prune \) -o
+      ! -user '{{ item }}'
+      -exec chown -v '{{ item }}' {} + | head -n 1
+  become: yes
+  with_items: '{{ rvm1_install_path_user }}'
+  when:
+    - rvm1_install_path_user is defined
+    - rvm1_install_path_user != None
+  register: rvm1_chown
+  changed_when: '"changed group" in rvm1_chown.stdout'
+  tags:
+    - rvm
+
+- name: Set group ownership of content under rvm1_install_path
+  shell:
+    find '{{ rvm1_install_path }}'
+      \( -iname ".git" -prune \) -o
+      ! -group '{{ item }}'
+      -exec chgrp -v '{{ item }}' {} + | head -n 1
+  become: yes
+  with_items: '{{ rvm1_install_path_group }}'
+  when:
+    - rvm1_install_path_group is defined
+    - rvm1_install_path_group != None
+  register: rvm1_chgrp
+  changed_when: '"changed group" in rvm1_chgrp.stdout'
+  tags:
+    - rvm
+
+- name: Set group permissions of content under rvm1_install_path
+  shell:
+    find '{{ rvm1_install_path }}'
+      \( -iname ".git" -prune \) -o
+      -type d ! -perm -g+s
+      -exec chmod -v g+rwxs {} + | head -n 1
+  become: yes
+  when:
+    - rvm1_install_path_group is defined
+    - rvm1_install_path_group != None
+  register: rvm1_chmod
+  changed_when: '"changed from" in rvm1_chmod.stdout'
+  tags:
+    - rvm
+
