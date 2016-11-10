@@ -38,6 +38,7 @@
   args:
     creates: '{{ rvm1_install_path }}/wrappers/{{ item.stdout }}/bundler'
   with_items: '{{ ruby_patch.results }}'
+  when: rvm1_bundler_install
   register: bundler_install
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
 
@@ -50,6 +51,16 @@
     group: '{{ root_group }}'
   when: not '--user-install' in rvm1_install_flags
   with_items: '{{ rvm1_symlink_binaries }}'
+
+- name: Symlink bundler binaries on the system path
+  file:
+    state: 'link'
+    src: '{{ rvm1_install_path }}/wrappers/default/{{ item }}'
+    dest: '{{ rvm1_symlink_to }}/{{ item }}'
+    owner: '{{ root_user }}'
+    group: '{{ root_group }}'
+  when: not '--user-install' in rvm1_install_flags and rvm1_bundler_install
+  with_items: '{{ rvm1_symlink_bundler_binaries }}'
 
 - name: Detect if ruby version can be deleted
   command: '{{ rvm1_rvm }} {{ rvm1_delete_ruby }} do true'

@@ -30,6 +30,9 @@ Below is a list of default values that you can configure:
 rvm1_rubies:
   - 'ruby-2.1.3'
 
+# Install the bundler gem
+rvm1_bundler_install: True
+
 # Delete a specific version of ruby (ie. ruby-2.1.0)
 rvm1_delete_ruby:
 
