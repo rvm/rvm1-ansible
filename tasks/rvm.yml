@@ -25,11 +25,10 @@
     path: '{{ rvm1_temp_download_path }}/rvm-installer.sh'
     mode: 0755
   when: not rvm_binary.stat.exists
-
+  
 - name: Import GPG keys
-  command: 'gpg --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
+  shell: curl -sSL https://rvm.io/mpapis.asc | gpg --import
   changed_when: False
-  when: rvm1_gpg_keys != ''
   register: result
   until: result.rc == 0
   retries: 5
