@@ -152,7 +152,7 @@ Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play bo
 
 ## Ansible galaxy
 
-You can find it on the official [ansible galaxy](https://galaxy.ansible.com/list#/roles/1087) if you want to rate it.
+You can find it on the official [ansible galaxy](https://galaxy.ansible.com/rvm_io/rvm1-ruby/) if you want to rate it.
 
 ## License
 
