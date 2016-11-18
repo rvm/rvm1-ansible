@@ -28,7 +28,7 @@ Below is a list of default values that you can configure:
 # Install 1 or more versions of ruby
 # The last ruby listed will be set as the default ruby
 rvm1_rubies:
-  - 'ruby-2.1.3'
+  - 'ruby-2.3.1'
 
 # Install the bundler gem
 rvm1_bundler_install: True
@@ -36,19 +36,19 @@ rvm1_bundler_install: True
 # Delete a specific version of ruby (ie. ruby-2.1.0)
 rvm1_delete_ruby:
 
-# Install path for rvm (defaults to system wide)
-rvm1_install_path: '/usr/local/rvm'
+# Install path for rvm (defaults to single user)
+rvm1_install_path: '~/.rvm'
 
 # Add or remove any install flags
-# NOTE: If you are doing a USER BASED INSTALL then
-#       make sure you ADD the --user-install flag below
-rvm1_install_flags: '--auto-dotfiles'
+# NOTE: If you are doing a ROOT BASED INSTALL then
+#       make sure you REMOVE the --user-install flag below
+rvm1_install_flags: '--auto-dotfilesi  --user-install'
 
 # Add additional ruby install flags
 rvm1_ruby_install_flags:
 
 # Set the owner for the rvm directory
-rvm1_user: 'root'
+rvm1_user: 'ubuntu'
 
 # URL for the latest installer script
 rvm1_rvm_latest_installer: 'https://raw.githubusercontent.com/wayneeseguin/rvm/master/binscripts/rvm-installer'
@@ -77,25 +77,33 @@ rvm1_autolib_mode: 3
 ```yaml
 ---
 
-- name: Configure servers with ruby support
+- name: Configure servers with ruby support for single user
   hosts: all
 
   roles:
-    - { role: rvm_io.rvm1-ruby, tags: ruby, become: yes }
+    - { role: rvm_io.rvm1-ruby,
+        tags: ruby,
+        rvm1_rubies: ['ruby-2.3.1'],
+        rvm1_user: 'ubuntu'
+      }
 ```
-If you need to pass a list of ruby versions, pass it in an array like so. 
+If you need to pass a list of ruby versions, pass it in an array like so.
 
 ```yaml
 ---
-- hosts: all
+- name: Configure servers with ruby support system wide
+  hosts: all
   roles:
     - { role: rvm_io.rvm1-ruby,
         tags: ruby,
-        rvm1_rubies: ['ruby-2.2.2','ruby-2.2.5'],
+        become: yes
+        rvm1_rubies: ['ruby-2.2.5','ruby-2.3.1'],
+        rvm1_user: 'root',
+        rvm1_install_path: '/usr/local/rvm'
       }
 ```
 _rvm_rubies must be specified via `ruby-x.x.x` so that if you want_
-_ruby 2.2.2, you will need to pass in an array **rvm_rubies: ['ruby-2.2.2']**_
+_ruby 2.2.5, you will need to pass in an array **rvm_rubies: ['ruby-2.2.5']**_
 
 
 #### System wide installation
@@ -103,20 +111,16 @@ _ruby 2.2.2, you will need to pass in an array **rvm_rubies: ['ruby-2.2.2']**_
 The above example would setup ruby system wide. It's very important that you
 run the play with sudo because it will need to write to `/usr/local/rvm`.
 
-#### To the same user as `ansible_ssh_user`
+#### To the same user as `ansible_user`
 
-In this case, just overwrite `rvm_install_path` and set the `--user-install` flag:
-
-**Note:** you still need to use sudo because during the ruby
-  installation phase rvm will internally make calls using sudo
-  to install certain ruby dependencies.
+In this case, just overwrite `rvm_install_path` and by default is set the `--user-install` flag:
 
 ```yaml
 rvm1_install_flags: '--auto-dotfiles --user-install'
-rvm1_install_path: '/home/{{ ansible_ssh_user }}/.rvm'
+rvm1_install_path: '/home/{{ ansible_user }}/.rvm'
 ```
 
-#### To a user that is not `ansible_ssh_user`
+#### To a user that is not `ansible_user`
 
 You **will need sudo here** because you will be writing outside the ansible
 user's home directory. Other than that it's the same as above, except you will
