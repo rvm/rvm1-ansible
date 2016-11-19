@@ -37,17 +37,21 @@ rvm1_bundler_install: True
 rvm1_delete_ruby:
 
 # Install path for rvm (defaults to single user)
+# NOTE: If you are doing a ROOT BASED INSTALL then make sure you
+#       set the install path to something like '/usr/local/rvm'
 rvm1_install_path: '~/.rvm'
 
 # Add or remove any install flags
 # NOTE: If you are doing a ROOT BASED INSTALL then
 #       make sure you REMOVE the --user-install flag below
-rvm1_install_flags: '--auto-dotfilesi  --user-install'
+rvm1_install_flags: '--auto-dotfiles  --user-install'
 
 # Add additional ruby install flags
 rvm1_ruby_install_flags:
 
 # Set the owner for the rvm directory
+# NOTE: If you are doing a ROOT BASED INSTALL then
+#       make sure you set rvm1_user to 'root'
 rvm1_user: 'ubuntu'
 
 # URL for the latest installer script
@@ -81,12 +85,13 @@ rvm1_autolib_mode: 3
   hosts: all
 
   roles:
-    - { role: rvm_io.rvm1-ruby,
+    - { role: rvm_io.ruby,
         tags: ruby,
         rvm1_rubies: ['ruby-2.3.1'],
         rvm1_user: 'ubuntu'
       }
 ```
+
 If you need to pass a list of ruby versions, pass it in an array like so.
 
 ```yaml
@@ -94,12 +99,14 @@ If you need to pass a list of ruby versions, pass it in an array like so.
 - name: Configure servers with ruby support system wide
   hosts: all
   roles:
-    - { role: rvm_io.rvm1-ruby,
+    - { role: rvm_io.ruby,
         tags: ruby,
         become: yes
+
         rvm1_rubies: ['ruby-2.2.5','ruby-2.3.1'],
-        rvm1_user: 'root',
-        rvm1_install_path: '/usr/local/rvm'
+        rvm1_install_flags: '--auto-dotfiles'     # Remove --user-install from defaults
+        rvm1_install_path: /usr/local/rvm         # Set to system location
+        rvm1_user: root                           # Need root account to access system location
       }
 ```
 _rvm_rubies must be specified via `ruby-x.x.x` so that if you want_
@@ -108,8 +115,8 @@ _ruby 2.2.5, you will need to pass in an array **rvm_rubies: ['ruby-2.2.5']**_
 
 #### System wide installation
 
-The above example would setup ruby system wide. It's very important that you
-run the play with sudo because it will need to write to `/usr/local/rvm`.
+The above example would setup ruby system wide. It's very important that you run the
+play as root because it will need to write to a system location specified by rvm1_install_path
 
 #### To the same user as `ansible_user`
 
@@ -122,7 +129,7 @@ rvm1_install_path: '/home/{{ ansible_user }}/.rvm'
 
 #### To a user that is not `ansible_user`
 
-You **will need sudo here** because you will be writing outside the ansible
+You **will need root access here** because you will be writing outside the ansible
 user's home directory. Other than that it's the same as above, except you will
 supply a different user account:
 
