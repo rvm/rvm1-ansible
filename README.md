@@ -16,7 +16,7 @@ using a version manager while still benefiting from what rvm has to offer.
 
 ## Installation
 
-`$ ansible-galaxy install rvm_io.rvm1-ruby`
+`$ ansible-galaxy install rvm_io.ruby`
 
 ## Role variables
 
