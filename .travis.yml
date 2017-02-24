@@ -50,3 +50,6 @@ script:
     | grep -q 'bundler'
     && (echo 'Bundler symlinked on system path test: pass' && exit 0)
     || (echo 'Bundler symlinked on system path test: fail' && exit 1)
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
