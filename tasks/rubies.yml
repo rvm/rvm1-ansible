@@ -22,6 +22,7 @@
   command: '{{ rvm1_rvm }} alias create default {{ rvm1_default_ruby_version }}'
   when: detect_default_ruby_version.stdout|default() == '' or
         rvm1_default_ruby_version not in detect_default_ruby_version.stdout
+  sudo_user: '{{ rvm1_user }}'
 
 - name: Detect installed ruby patch number
   shell: >
