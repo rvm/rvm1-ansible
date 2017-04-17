@@ -12,3 +12,7 @@
 
   roles:
     - rvm1-ansible
+
+  post_tasks:
+    - name: Test | Can create a gemset
+      command: 'rvm gemset create test'
