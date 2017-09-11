@@ -1,0 +1,6 @@
+version: "3"
+services:
+  debian8:
+    build: ./dockerfiles/debian8
+    cap_add:
+      - ALL

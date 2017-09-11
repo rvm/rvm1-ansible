@@ -1,1 +1,2 @@
-localhost
+[debian]
+tests_debian8_1 ansible_connection=docker
