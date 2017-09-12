@@ -4,3 +4,7 @@ services:
     build: ./dockerfiles/debian8
     cap_add:
       - ALL
+  debian9:
+    build: ./dockerfiles/debian9
+    cap_add:
+      - ALL
