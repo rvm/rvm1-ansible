@@ -1,7 +1,5 @@
 FROM ubuntu:14.04
 
-RUN useradd -ms /bin/bash user
-
 RUN apt-get update && \
 		apt-get install -y \
 			curl \
@@ -18,5 +16,8 @@ RUN apt-get update && \
 WORKDIR /opt/
 COPY build /opt/build
 RUN  bash build
+
+RUN useradd -ms /bin/bash user \
+		&& echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
 CMD ["/sbin/init"]
