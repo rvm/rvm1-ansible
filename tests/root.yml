@@ -16,4 +16,4 @@
   gather_facts: false
   tasks:
     - name: Assert tasks
-      include: assertetions.yml
+      include: assertions.yml

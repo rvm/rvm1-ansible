@@ -1,55 +1,32 @@
 ---
-language: 'python'
-python: '2.7'
+language: c
+sudo: required
 
-env:
-  - SITE_AND_INVENTORY='tests/test.yml -i tests/inventory'
+services:
+    - docker
+
+cache:
+  directories:
+    - $HOME/docker
 
 before_install:
   - '__rvm_unload ; rm -rf ~/.rvm'
-
-install:
-  - 'pip install ansible==2.2.0'
-  - 'printf "[defaults]\nroles_path = ../" > ansible.cfg'
+  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - sudo pip install ansible==2.2.0
 
 script:
+  - cd tests
+  - docker-compose up -d
+  - ansible-playbook user.yml
+
+before_cache:
   - >
-    ruby -v
-    | grep -q 'ruby'
-    && (echo 'No ruby test: pass' && exit 1)
-    || (echo 'No ruby test: fail' && exit 0)
-  - 'ansible-playbook $SITE_AND_INVENTORY --syntax-check'
-  - 'ansible-playbook $SITE_AND_INVENTORY --connection=local -vvvv'
-  - >
-    ansible-playbook $SITE_AND_INVENTORY --connection=local
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
-  - >
-    ~/.rvm/wrappers/default/ruby -v
-    | grep -q '2.3.1'
-    && (echo 'Default ruby test: pass' && exit 0)
-    || (echo 'Default ruby test: fail' && exit 1)
-  - >
-    ls ~/.rvm/rubies
-    | grep -q 'ruby-2.2.5'
-    && (echo 'Multiple rubies test: pass' && exit 0)
-    || (echo 'Multiple rubies test: fail' && exit 1)
-  - >
-    ansible-playbook $SITE_AND_INVENTORY --connection=local --extra-vars='rvm1_delete_ruby=ruby-2.2.5'
-    | grep -q 'ok=1.*failed=0'
-    && (echo 'Delete ruby test: pass' && exit 0)
-    || (echo 'Delete ruby test: fail' && exit 1)
-  - >
-    ls ~/.rvm/rubies/ | wc -l
-    | grep -q '2'
-    && (echo 'Really deleted ruby test: pass' && exit 0)
-    || (echo 'Really deleted ruby test: fail' && exit 1)
-  - >
-    ls ~/.rvm/wrappers/default/
-    | grep -q 'bundler'
-    && (echo 'Bundler symlinked on system path test: pass' && exit 0)
-    || (echo 'Bundler symlinked on system path test: fail' && exit 1)
+    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
