@@ -1,22 +1,28 @@
 ---
-language: c
+language: generic
+
 sudo: required
 
+env:
+  DOCKER_COMPOSE_VERSION: 1.16.1
+
 services:
-    - docker
+  - docker
 
 cache:
+  pip: true
   directories:
     - $HOME/docker
 
 before_install:
-  - '__rvm_unload > /dev/null 2>&1 ; rm -rf ~/.rvm'
   - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
   - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - sudo pip install ansible==2.2.0 > /dev/null 2>&1
+
+install:
+  - sudo pip install ansible==2.2.2 > /dev/null 2>&1
 
 script:
   - cd tests
