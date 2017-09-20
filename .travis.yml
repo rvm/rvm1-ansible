@@ -10,17 +10,17 @@ cache:
     - $HOME/docker
 
 before_install:
-  - '__rvm_unload ; rm -rf ~/.rvm'
+  - '__rvm_unload ; rm -rf ~/.rvm' > /dev/null 2>&1
   - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/1.16.1/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
-  - sudo pip install ansible==2.2.0
+  - sudo pip install ansible==2.2.0 > /dev/null 2>&1
 
 script:
   - cd tests
-  - docker-compose up -d
+  - docker-compose up -d > /dev/null 2>&1
   - ansible-playbook user.yml -l centos
   - ansible-playbook user.yml -l debian
   - ansible-playbook user.yml -l ubuntu
