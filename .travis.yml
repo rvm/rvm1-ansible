@@ -21,7 +21,9 @@ before_install:
 script:
   - cd tests
   - docker-compose up -d
-  - ansible-playbook user.yml
+  - ansible-playbook user.yml -l centos
+  - ansible-playbook user.yml -l debian
+  - ansible-playbook user.yml -l ubuntu
 
 before_cache:
   - >

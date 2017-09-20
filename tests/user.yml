@@ -1,6 +1,7 @@
 ---
 - hosts: all
   gather_facts: false
+  remote_user: user
   vars:
     rvm1_user: user
     rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
@@ -14,6 +15,7 @@
 # Asserts tasks
 - hosts: all
   gather_facts: false
+  remote_user: user
   tasks:
     - name: Assert tasks
       include: assertions.yml
