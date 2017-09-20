@@ -1,4 +1,4 @@
-## What is rvm1-ansible? [![Build Status](https://travis-ci.org/rvm/rvm1-ansible.svg?branch=master)](https://travis-ci.org/rvm/rvm1-ansible)
+## What is rvm1-ansible? [![Build Status](https://travis-ci.org/rvm/rvm1-ansible.svg?branch=master)](https://travis-ci.org/rvm/rvm1-ansible) [![Ansible Role](https://img.shields.io/badge/role-rvm_io-red.svg)](https://galaxy.ansible.com/rvm_io/ruby/)
 
 It is an [Ansible](http://www.ansible.com/home) role to install and manage ruby versions using rvm.
 
