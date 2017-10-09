@@ -9,9 +9,20 @@
   when: rvm1_rubies
 
 - name: Install rubies
+  become: yes
+  become_user: root
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
   when: rvm1_rubies and item.rc|default(0) != 0
   with_items: '{{ detect_rubies.results }}'
+
+- name: Change ownership
+  become: yes
+  become_user: root
+  file:
+    state: directory
+    path: "{{ rvm1_install_path }}"
+    owner: "{{ rvm1_user }}"
+    recurse: yes
 
 - name: Detect default ruby version
   command: '{{ rvm1_rvm }} alias list default'
