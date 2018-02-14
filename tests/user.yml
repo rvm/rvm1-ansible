@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   remote_user: user
   vars:
     rvm1_user: user
@@ -14,7 +14,7 @@
 
 # Asserts tasks
 - hosts: all
-  gather_facts: false
+  gather_facts: true
   remote_user: user
   tasks:
     - name: Assert tasks
