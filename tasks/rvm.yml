@@ -38,6 +38,7 @@
 
 - name: Install which (CentOS, RHEL)
   become: yes
+  become_user: root
   yum:
     name: "{{ item }}"
     state: present
