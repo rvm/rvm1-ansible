@@ -1,6 +1,10 @@
 # CHANGELOG
 ## MASTER
 
+### v2.0.2
+
+* Install `which` via the package manager for RHEL/CentOS distributions
+
 ### v2.0.1
 * Fix issue `src file does not exist` cause by testrb
 
