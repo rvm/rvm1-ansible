@@ -37,8 +37,6 @@
   when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_result.rc != 0
 
 - name: Install which (CentOS, RHEL)
-  become: yes
-  become_user: root
   yum:
     name: "{{ item }}"
     state: present
