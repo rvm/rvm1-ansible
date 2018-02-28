@@ -36,15 +36,6 @@
   shell: curl -sSL https://rvm.io/mpapis.asc | gpg --import -
   when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_result.rc != 0
 
-- name: Install which (CentOS, RHEL)
-  become_user: root
-  yum:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - which
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
-
 - name: Install rvm
   command: >
     {{ rvm1_temp_download_path }}/rvm-installer.sh {{ rvm1_rvm_version }}
