@@ -18,4 +18,4 @@
   remote_user: user
   tasks:
     - name: Assert tasks
-      include: assertions.yml
+      import_tasks: assertions.yml
