@@ -158,8 +158,9 @@ Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play bo
 
 ## Requirements
 
-- Tested on ubuntu 12.04 LTS but it should work on other versions that are similar.
-- Tested on RHEL6.5 and CentOS [6.5, 6.6, 6.7]
+- Tested on CentOS 6 and 7
+- Tested on Debian 8 and 9
+- Tested on Ubuntu 14.04 and 16.04
 
 ## Ansible galaxy
 
