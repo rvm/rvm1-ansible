@@ -26,7 +26,7 @@ install:
 
 script:
   - cd tests
-  - docker-compose up -d > /dev/null 2>&1
+  - docker-compose up -d
   - ansible-playbook user.yml -l centos
   - ansible-playbook user.yml -l debian
   - ansible-playbook user.yml -l ubuntu
