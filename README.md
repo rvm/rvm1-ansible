@@ -16,7 +16,7 @@ using a version manager while still benefiting from what rvm has to offer.
 
 ## Installation
 
-`$ ansible-galaxy install rvm_io.ruby`
+`$ ansible-galaxy install rvm.ruby`
 
 ## Role variables
 
@@ -85,7 +85,7 @@ rvm1_autolib_mode: 3
   hosts: all
 
   roles:
-    - { role: rvm_io.ruby,
+    - { role: rvm.ruby,
         tags: ruby,
         rvm1_rubies: ['ruby-2.3.1'],
         rvm1_user: 'ubuntu'
@@ -99,7 +99,7 @@ If you need to pass a list of ruby versions, pass it in an array like so.
 - name: Configure servers with ruby support system wide
   hosts: all
   roles:
-    - { role: rvm_io.ruby,
+    - { role: rvm.ruby,
         tags: ruby,
         become: yes,
 
