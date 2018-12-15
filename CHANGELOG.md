@@ -1,6 +1,9 @@
 # CHANGELOG
 ## MASTER
 
+### v2.1.0
+* Bump ansible version to 2.4, replace include by import_tasks
+
 ### v2.0.1
 * Fix issue `src file does not exist` cause by testrb
 
