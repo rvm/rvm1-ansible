@@ -1,5 +1,6 @@
 # CHANGELOG
 ## MASTER
+* Include pkuczynski gpg key
 
 ### v2.1.0
 * Bump ansible version to 2.4, replace include by import_tasks
