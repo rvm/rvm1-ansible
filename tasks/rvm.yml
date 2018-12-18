@@ -22,14 +22,12 @@
   when: not rvm_installer.stat.exists
 
 - name: Import GPG keys
-  shell: 'gpg --batch --keyserver {{ rvm1_gpg_key_server }} --recv-keys {{ rvm1_gpg_keys }}'
+  shell: 'gpg --batch --keyserver {{ item }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
   check_mode: False
-  when: not ansible_check_mode and rvm1_gpg_keys != ''
+  when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_result.rc != 0
   register: gpg_result
-  until: gpg_result.rc == 0
-  retries: 5
-  delay: 5
+  with_items: rvm1_gpg_key_servers
   ignore_errors: True
 
 - name: Import GPG keys the other way

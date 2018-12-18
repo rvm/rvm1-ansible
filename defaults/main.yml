@@ -43,6 +43,13 @@ rvm1_gpg_keys: '409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D695
 # The GPG key server
 rvm1_gpg_key_server: 'hkp://keys.gnupg.net'
 
+# The GPG alternative key servers
+rvm1_gpg_key_servers:
+  - {{ rvm1_gpg_key_server }}
+  - pool.sks-keyservers.net
+  - pgp.mit.edu
+  - keyserver.pgp.com
+
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
 
