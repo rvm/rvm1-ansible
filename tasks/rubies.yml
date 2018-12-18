@@ -67,9 +67,11 @@
   changed_when: False
   failed_when: False
   register: detect_delete_ruby
-  when: rvm1_delete_ruby
+  when: rvm1_delete_ruby is defined
 
 - name: Delete ruby version
   command: '{{ rvm1_rvm }} remove {{ rvm1_delete_ruby }}'
   changed_when: False
-  when: rvm1_delete_ruby and detect_delete_ruby.rc == 0
+  when:
+    - rvm1_delete_ruby is defined
+    - detect_delete_ruby.rc == 0

@@ -4,6 +4,9 @@
 
 * ...
 
+### Unreleased
+* Fix 'ruby' is undefined error when using `rvm1_delete_ruby`. Issue: #156
+
 ### 2.1.2
 2018-12-28 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.1...v2.1.2)
 
