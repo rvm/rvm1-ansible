@@ -1,7 +1,8 @@
 # Changelog
 
 ### NEXT
-* ...
+
+* Fallback to alternative GPG key servers
 
 ### 2.1.1 
 2018-12-18
@@ -19,9 +20,11 @@
 * Include pkuczynski gpg key (#189)
 
 ### 2.0.1
+
 * Fix issue `src file does not exist` cause by testrb
 
 ### 2.0.0
+
 * Bump ansible version to 2.2
 * Update readme
 
