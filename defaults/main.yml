@@ -9,7 +9,7 @@ rvm1_rubies:
 rvm1_bundler_install: True
 
 # The version of bundler to install
-rvm1_bundler_version: '~>1.16'
+rvm1_bundler_version: '~>1.17'
 
 # Delete a specific version of ruby (ie. ruby-2.1.0)
 rvm1_delete_ruby:
