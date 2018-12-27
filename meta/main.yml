@@ -2,7 +2,7 @@
 galaxy_info:
   author: RVM
   description: The official RVM role to install and manage your ruby versions
-  license: license (MIT)
+  license: MIT
   min_ansible_version: 2.4
 
   platforms:
