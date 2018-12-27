@@ -1,14 +1,16 @@
 # Changelog
 
 ### NEXT
-* ...
 
-### 2.1.1 
+* Fallback to alternative GPG key servers (#192)
+* Remove keys.gnupg.net in favour of pool.sks-keyservers.net (#192)
+
+### 2.1.1
 2018-12-18
 
 * Fix RVM verification process after changing `command` to `shell`
 
-### 2.1.0 
+### 2.1.0
 2018-12-18
 
 * Support centos6 and centos7
@@ -19,9 +21,11 @@
 * Include pkuczynski gpg key (#189)
 
 ### 2.0.1
+
 * Fix issue `src file does not exist` cause by testrb
 
 ### 2.0.0
+
 * Bump ansible version to 2.2
 * Update readme
 
