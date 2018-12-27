@@ -2,15 +2,15 @@
 
 ### NEXT
 
-* Fallback to alternative GPG key servers
-* Remove keys.gnupg.net in favour of pool.sks-keyservers.net
+* Fallback to alternative GPG key servers (#192)
+* Remove keys.gnupg.net in favour of pool.sks-keyservers.net (#192)
 
-### 2.1.1 
+### 2.1.1
 2018-12-18
 
 * Fix RVM verification process after changing `command` to `shell`
 
-### 2.1.0 
+### 2.1.0
 2018-12-18
 
 * Support centos6 and centos7
