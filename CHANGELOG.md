@@ -2,6 +2,11 @@
 
 ### NEXT
 
+* ...
+
+### 2.1.2
+2018-12-28
+
 * Fallback to alternative GPG key servers (#192)
 * Remove keys.gnupg.net in favour of pool.sks-keyservers.net (#192)
 
