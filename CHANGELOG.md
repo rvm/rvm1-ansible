@@ -5,18 +5,18 @@
 * ...
 
 ### 2.1.2
-2018-12-28
+2018-12-28 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.1...v2.1.2)
 
 * Fallback to alternative GPG key servers (#192)
 * Remove keys.gnupg.net in favour of pool.sks-keyservers.net (#192)
 
 ### 2.1.1
-2018-12-18
+2018-12-18 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.0...v2.1.1)
 
 * Fix RVM verification process after changing `command` to `shell`
 
 ### 2.1.0
-2018-12-18
+2018-12-18 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.0.1...v2.1.0)
 
 * Support centos6 and centos7
 * Reduce the verbosity
