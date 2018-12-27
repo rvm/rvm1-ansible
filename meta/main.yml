@@ -1,8 +1,7 @@
 ---
 galaxy_info:
-  author: Nick Janetakis
-  description: The official rvm role to install and manage your ruby versions.
-  company: ''
+  author: RVM
+  description: The official RVM role to install and manage your ruby versions
   license: license (MIT)
   min_ansible_version: 2.4
 
