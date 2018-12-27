@@ -25,17 +25,17 @@
   shell: 'gpg --batch --keyserver {{ item }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
   check_mode: False
-  when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_result.rc != 0
-  register: gpg_result
-  with_items: rvm1_gpg_key_servers
+  with_items: '{{ rvm1_gpg_key_servers }}'
+  register: gpg_import
+  when: not ansible_check_mode and rvm1_gpg_keys != '' and (gpg_import is not defined or gpg_import.rc != 0)
   ignore_errors: True
 
 - name: Import GPG keys the other way
   shell: 'curl -sSL https://rvm.io/{{ item }} | gpg --batch --import -'
   with_items:
-  - mpapis.asc
-  - pkuczynski.asc
-  when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_result.rc != 0
+    - mpapis.asc
+    - pkuczynski.asc
+  when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_import.rc != 0
 
 - name: Install rvm
   shell: >
