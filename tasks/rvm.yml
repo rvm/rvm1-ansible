@@ -21,7 +21,7 @@
     mode: 0755
   when: not rvm_installer.stat.exists
 
-- name: Import GPG keys
+- name: Import GPG keys from keyservers
   shell: 'gpg --batch --keyserver {{ item }} --recv-keys {{ rvm1_gpg_keys }}'
   changed_when: False
   check_mode: False
@@ -30,12 +30,17 @@
   when: not ansible_check_mode and rvm1_gpg_keys != '' and (gpg_import is not defined or gpg_import.rc != 0)
   ignore_errors: True
 
-- name: Import GPG keys the other way
+- name: Was GPG import from keyservers succesfull?
+  set_fact: gpg_imported_from={{ item.item }}
+  when: "'rc' in item and item.rc == 0"
+  with_items: "{{ gpg_import.results }}"
+
+- name: Import GPG keys from rvm.io
   shell: 'curl -sSL https://rvm.io/{{ item }} | gpg --batch --import -'
   with_items:
     - mpapis.asc
     - pkuczynski.asc
-  when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_import.rc != 0
+  when: not ansible_check_mode and rvm1_gpg_keys != '' and gpg_imported_from is not defined
 
 - name: Install rvm
   shell: >
