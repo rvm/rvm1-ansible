@@ -45,7 +45,7 @@ rvm1_gpg_key_server: 'hkp://pool.sks-keyservers.net'
 
 # The GPG alternative key servers
 rvm1_gpg_key_servers:
-  - {{ rvm1_gpg_key_server }}
+  - '{{ rvm1_gpg_key_server }}'
   - hkp://ipv4.pool.sks-keyservers.net
   - hkp://pgp.mit.edu
   - hkp://keyserver.pgp.com
