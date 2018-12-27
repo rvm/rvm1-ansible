@@ -35,7 +35,7 @@
   when: "'rc' in item and item.rc == 0"
   with_items: "{{ gpg_import.results }}"
 
-- name: Import GPG keys from rvm.io
+- name: Import GPG keys from rvm.io, if keyservers failed
   shell: 'curl -sSL https://rvm.io/{{ item }} | gpg --batch --import -'
   with_items:
     - mpapis.asc
