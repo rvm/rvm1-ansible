@@ -12,6 +12,19 @@
     - role: rvm1-ansible
       become: yes
 
+- hosts: all
+  gather_facts: false
+  remote_user: user
+  vars:
+    rvm1_user: user
+    rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
+    rvm1_rubies:
+      - 'ruby-1.9.3'
+    rvm1_bundler_version: '~>1.7.0'
+  roles:
+    - role: rvm1-ansible
+      become: yes
+
 # Asserts tasks
 - hosts: all
   gather_facts: false

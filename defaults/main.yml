@@ -8,6 +8,11 @@ rvm1_rubies:
 # Install bundler
 rvm1_bundler_install: True
 
+# Bundler version - If blank use latest
+rvm1_bundler_version: ''
+rvm1_bundler_quoted_version: "'{{ rvm1_bundler_version }}'"
+rvm1_bundler_install_command: '{{ rvm1_bundler_version | ternary("gem install -v " + rvm1_bundler_quoted_version + " bundler", "gem install bundler") }}'
+
 # Delete a specific version of ruby (ie. ruby-2.1.0)
 rvm1_delete_ruby:
 

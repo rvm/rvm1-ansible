@@ -11,6 +11,18 @@
   roles:
     - role: rvm1-ansible
 
+- hosts: all
+  gather_facts: false
+  vars:
+    rvm1_user: root
+    rvm1_install_flags: '--auto-dotfiles'
+    rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
+    rvm1_bundler_version: '~>1.7.0'
+    rvm1_rubies:
+      - 'ruby-1.9.3'
+  roles:
+    - role: rvm1-ansible
+
 # Asserts tasks
 - hosts: all
   gather_facts: false

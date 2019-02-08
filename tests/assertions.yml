@@ -26,6 +26,7 @@
   changed_when: false
 - assert:
     that:
+      - "'ruby-1.9.3' in check_ruby_multiple.stdout"
       - "'ruby-2.2.5' in check_ruby_multiple.stdout"
       - "'ruby-2.3.1' in check_ruby_multiple.stdout"
     msg: No multiple rubies installed
