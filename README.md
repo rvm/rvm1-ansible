@@ -38,6 +38,9 @@ rvm1_rubies:
 # Install the bundler gem
 rvm1_bundler_install: True
 
+# Specify a version of bundler
+rvm1_bundler_version: 2.0.1
+
 # Delete a specific version of ruby (ie. ruby-2.1.0)
 rvm1_delete_ruby:
 
