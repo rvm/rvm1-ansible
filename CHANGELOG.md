@@ -2,7 +2,7 @@
 
 ### NEXT
 
-* ...
+* Fixes bare variables in conditionals (deprecation warnings with Ansible 2.8+) (#204)
 
 ### 2.1.2
 2018-12-28 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.1...v2.1.2)
