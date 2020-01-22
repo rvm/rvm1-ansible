@@ -80,6 +80,11 @@ rvm1_gpg_key_server: 'hkp://pool.sks-keyservers.net'
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
+
+# Symlink Ruby related executables on the system path
+# for multi-user installation
+rvm1_symlink_for_multi_user_install: True
+
 ```
 
 ## Example playbooks
