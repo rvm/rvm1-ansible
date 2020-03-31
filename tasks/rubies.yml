@@ -38,7 +38,7 @@
   args:
     creates: '{{ rvm1_install_path }}/wrappers/{{ item.stdout }}/bundler'
   with_items: '{{ ruby_patch.results }}'
-  when: rvm1_bundler_install
+  when: rvm1_bundler_install and rvm1_default_ruby_version is version('ruby-2.3.0', 'ge')
   register: bundler_install
   changed_when: '"Successfully installed bundler" in bundler_install.stdout'
 
