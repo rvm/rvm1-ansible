@@ -1,0 +1,37 @@
+version: 2
+mergeable:
+  - when: pull_request.*
+    name: "triage"
+    validate:
+      - do: label
+        and:
+          - no_empty:
+              enabled: true
+          - must_exclude:
+              regex: duplicate|feedback|invalid|wont|progress
+      - do: assignee
+        min:
+          count: 1
+      - do: description
+        no_empty:
+          enabled: true
+          message: Description should not be empty. Provide details with **what** was changed, **why** it was changed, and **how** it was changed.
+      - do: dependent
+        changed:
+          file: '*'
+          files: ['CHANGELOG.md']
+        message: Missing CHANGELOG entry
+    fail:
+      - do: assign
+        assignees: [ '@author' ]
+
+  # Stale PR
+  - when: schedule.repository
+    validate:
+      - do: stale
+        days: 20
+        type: pull_request, issues
+    pass:
+      - do: comment
+        payload:
+          body: There was no activity for 20 days. Is this still relevant?
