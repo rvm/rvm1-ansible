@@ -17,7 +17,7 @@
   changed_when: false
 - assert:
     that:
-      - check_ruby_default.stdout == 'ruby 2.3.1'
+      - check_ruby_default.stdout == 'ruby 2.7.1'
     msg: No default ruby installed
 
 - name: Check multiple rubies
@@ -26,12 +26,12 @@
   changed_when: false
 - assert:
     that:
-      - "'ruby-2.2.5' in check_ruby_multiple.stdout"
-      - "'ruby-2.3.1' in check_ruby_multiple.stdout"
+      - "'ruby-2.6.6' in check_ruby_multiple.stdout"
+      - "'ruby-2.7.1' in check_ruby_multiple.stdout"
     msg: No multiple rubies installed
 
 - name: Check bundler symlinked on system path
-  shell: ls ~/.rvm/wrappers/default/ |grep 'bundler'
+  shell: ls ~/.rvm/wrappers/default/ | grep 'bundler'
   register: check_ruby_bundler
   changed_when: false
 - assert:
