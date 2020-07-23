@@ -12,10 +12,14 @@
   roles:
     - role: rvm1-ansible
       become: yes
+  tags: setup
 
 - name: RVM Setup Validation
   hosts: all
   gather_facts: false
   remote_user: user
+  vars:
+    rvm1_install_path: '/home/user/.rvm'
   tasks:
     - import_tasks: assertions.yml
+  tags: validate

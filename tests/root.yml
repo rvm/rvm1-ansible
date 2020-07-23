@@ -5,15 +5,19 @@
   vars:
     rvm1_user: root
     rvm1_install_flags: '--auto-dotfiles'
-    rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
+    rvm1_install_path: '/opt/rvm'
     rvm1_rubies:
       - 'ruby-2.6.6'
       - 'ruby-2.7.1'
   roles:
     - rvm1-ansible
+  tags: setup
 
 - name: RVM Setup Validation
   hosts: all
   gather_facts: false
+  vars:
+    rvm1_install_path: '/opt/rvm'
   tasks:
     - import_tasks: assertions.yml
+  tags: validate

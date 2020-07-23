@@ -30,6 +30,11 @@ script:
   - ansible-playbook user.yml -l centos
   - ansible-playbook user.yml -l debian
   - ansible-playbook user.yml -l ubuntu
+  - docker-compose down
+  - docker-compose up -d
+  - ansible-playbook root.yml -l centos
+  - ansible-playbook root.yml -l debian
+  - ansible-playbook root.yml -l ubuntu
 
 before_cache:
   - >
