@@ -7,6 +7,7 @@
 * Fixes regression forbidding installation of rubies (#209, fixed via #207)
 * Fix conditional logic for detecting and removing versions of Ruby (#212)
 * Report when Ruby is removed and don't ignore when version listing fails (#212)
+* Update and enhance the test environment (#215)
 
 ### 2.1.2
 2018-12-28 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.1...v2.1.2)
