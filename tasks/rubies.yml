@@ -6,11 +6,11 @@
   failed_when: False
   register: detect_rubies
   with_items: '{{ rvm1_rubies }}'
-  when: rvm1_rubies is defined
+  when: rvm1_rubies is defined and rvm1_rubies | length > 0
 
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
-  when: rvm1_rubies is defined and item.rc|default(0) != 0
+  when: rvm1_rubies is defined and rvm1_rubies | length > 0 and item.rc|default(0) != 0
   with_items: '{{ detect_rubies.results }}'
 
 - name: Detect default ruby version
