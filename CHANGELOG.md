@@ -4,6 +4,8 @@
 
 * Fixes bare variables in conditionals (deprecation warnings with Ansible 2.8+) (#204)
 * Fix boolean values when checking array (#207)
+* Fix conditional logic for detecting and removing versions of Ruby (#212)
+* Report when Ruby is removed and don't ignore when version listing fails (#212)
 
 ### 2.1.2
 2018-12-28 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.1...v2.1.2)
