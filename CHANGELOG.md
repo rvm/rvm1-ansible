@@ -4,6 +4,7 @@
 
 * Fixes bare variables in conditionals (deprecation warnings with Ansible 2.8+) (#204)
 * Fix boolean values when checking array (#207)
+* Fixes regression forbidding installation of rubies (#209, fixed via #207)
 * Fix conditional logic for detecting and removing versions of Ruby (#212)
 * Report when Ruby is removed and don't ignore when version listing fails (#212)
 
