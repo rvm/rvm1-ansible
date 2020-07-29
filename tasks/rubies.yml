@@ -62,14 +62,16 @@
   when: not '--user-install' in rvm1_install_flags and rvm1_bundler_install
   with_items: '{{ rvm1_symlink_bundler_binaries }}'
 
-- name: Detect if ruby version can be deleted
-  command: '{{ rvm1_rvm }} {{ rvm1_delete_ruby }} do true'
+- name: List installed versions of Ruby (for deletion)
+  command: '{{ rvm1_rvm }} list strings'
   changed_when: False
-  failed_when: False
-  register: detect_delete_ruby
-  when: rvm1_delete_ruby | bool
+  register: rvm1_list_installed_rubies
+  when: rvm1_delete_ruby is defined and rvm1_delete_ruby != ''
 
-- name: Delete ruby version
+- name: Delete ruby if relevant
   command: '{{ rvm1_rvm }} remove {{ rvm1_delete_ruby }}'
-  changed_when: False
-  when: rvm1_delete_ruby | bool and detect_delete_ruby.rc == 0
+  register: rvm_delete_command_result
+  changed_when: "'#removing' in rvm_delete_command_result.stdout"
+  when:
+    - rvm1_delete_ruby is defined and rvm1_delete_ruby != ''
+    - rvm1_delete_ruby in rvm1_list_installed_rubies.stdout.splitlines()
