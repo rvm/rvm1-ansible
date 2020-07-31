@@ -1,17 +1,11 @@
 ---
 
-- name: Detect if rubies are installed
-  command: '{{ rvm1_rvm }} {{ item }} do true'
-  changed_when: False
-  failed_when: False
-  register: detect_rubies
-  with_items: '{{ rvm1_rubies }}'
-  when: rvm1_rubies is defined and rvm1_rubies | length > 0
-
 - name: Install rubies
-  command: '{{ rvm1_rvm }} install {{ item.item }} {{ rvm1_ruby_install_flags }}'
-  when: rvm1_rubies is defined and rvm1_rubies | length > 0 and item.rc|default(0) != 0
-  with_items: '{{ detect_rubies.results }}'
+  command: '{{ rvm1_rvm }} install {{ item }} {{ rvm1_ruby_install_flags }}'
+  when: rvm1_rubies is defined and rvm1_rubies | length > 0
+  with_items: '{{ rvm1_rubies }}'
+  register: rvm_install_rubies
+  changed_when: "'#importing gemset' in rvm_install_rubies.stdout"
 
 - name: Detect default ruby version
   command: '{{ rvm1_rvm }} alias list default'
@@ -62,16 +56,8 @@
   when: not '--user-install' in rvm1_install_flags and rvm1_bundler_install
   with_items: '{{ rvm1_symlink_bundler_binaries }}'
 
-- name: List installed versions of Ruby (for deletion)
-  command: '{{ rvm1_rvm }} list strings'
-  changed_when: False
-  register: rvm1_list_installed_rubies
-  when: rvm1_delete_ruby is defined and rvm1_delete_ruby != ''
-
 - name: Delete ruby if relevant
   command: '{{ rvm1_rvm }} remove {{ rvm1_delete_ruby }}'
-  register: rvm_delete_command_result
-  changed_when: "'#removing' in rvm_delete_command_result.stdout"
-  when:
-    - rvm1_delete_ruby is defined and rvm1_delete_ruby != ''
-    - rvm1_delete_ruby in rvm1_list_installed_rubies.stdout.splitlines()
+  register: rvm_delete_command
+  changed_when: "'#removing' in rvm_delete_command.stdout"
+  when: rvm1_delete_ruby is defined and rvm1_delete_ruby
