@@ -6,7 +6,7 @@
   changed_when: false
 - assert:
     that:
-      - check_ruby_default.stdout == 'ruby 2.7.1'
+      - check_ruby_default.stdout == 'ruby {{ rvm_tests_mri_version_default }}'
       - check_ruby_default.rc == 0
     msg: Default ruby version is wrong
 
@@ -17,7 +17,7 @@
   changed_when: false
 - assert:
     that:
-      - check_rvm_loaded.stdout == '{{ rvm1_install_path }}/rubies/ruby-2.7.1/bin/ruby'
+      - check_rvm_loaded.stdout == '{{ rvm1_install_path }}/rubies/ruby-{{ rvm_tests_mri_version_default }}/bin/ruby'
       - check_rvm_loaded.rc == 0
     msg: Default ruby is in the wrong path
 
@@ -28,20 +28,20 @@
   changed_when: false
 - assert:
     that:
-      - "'ruby-2.6.6' in check_ruby_multiple.stdout"
-      - "'ruby-2.7.1' in check_ruby_multiple.stdout"
+      - "'ruby-{{ rvm_tests_mri_version_other }}' in check_ruby_multiple.stdout"
+      - "'ruby-{{ rvm_tests_mri_version_default }}' in check_ruby_multiple.stdout"
       - check_ruby_multiple.rc == 0
     msg: No multiple rubies installed
 
 - name: Check ruby switch
   command:
-    cmd: bash -lc 'rvm use 2.6.6 && ruby -v | cut -c1-10'
+    cmd: bash -lc 'rvm use {{ rvm_tests_mri_version_other }} && ruby -v | cut -c1-10'
   register: check_ruby_switch
   changed_when: false
 - assert:
     that:
-      - "'Using {{ rvm1_install_path }}/gems/ruby-2.6.6' in check_ruby_switch.stdout"
-      - "'ruby 2.6.6' in check_ruby_switch.stdout"
+      - "'Using {{ rvm1_install_path }}/gems/ruby-{{ rvm_tests_mri_version_other }}' in check_ruby_switch.stdout"
+      - "'ruby {{ rvm_tests_mri_version_other }}' in check_ruby_switch.stdout"
       - check_ruby_switch.rc == 0
     msg: Failed to switch the ruby version
 

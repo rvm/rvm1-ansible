@@ -7,8 +7,8 @@
     rvm1_install_flags: '--auto-dotfiles'
     rvm1_install_path: '/opt/rvm'
     rvm1_rubies:
-      - 'ruby-2.6.6'
-      - 'ruby-2.7.1'
+      - 'ruby-{{ rvm_tests_mri_version_other }}'
+      - 'ruby-{{ rvm_tests_mri_version_default }}'
   roles:
     - rvm1-ansible
   tags: setup
