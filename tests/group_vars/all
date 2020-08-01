@@ -1,0 +1,7 @@
+---
+rvm_tests_mri_version_default: 2.7.1
+rvm_tests_mri_version_other: 2.6.6
+
+# Upcoming
+# rvm_tests_jruby_version_x: 9.2.12.0
+# ...

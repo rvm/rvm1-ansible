@@ -4,7 +4,17 @@ language: generic
 sudo: required
 
 env:
-  DOCKER_COMPOSE_VERSION: 1.16.1
+  global:
+    - DOCKER_CACHE_DIR=$HOME/docker
+    - DOCKER_COMPOSE_VERSION=1.26.2
+    - ANSIBLE_VERSION=2.9.9
+  jobs:
+    - PLATFORM=centos PLAYBOOK=user.yml
+    - PLATFORM=debian PLAYBOOK=user.yml
+    - PLATFORM=ubuntu PLAYBOOK=user.yml
+    - PLATFORM=centos PLAYBOOK=root.yml
+    - PLATFORM=debian PLAYBOOK=root.yml
+    - PLATFORM=ubuntu PLAYBOOK=root.yml
 
 services:
   - docker
@@ -12,29 +22,34 @@ services:
 cache:
   pip: true
   directories:
-    - $HOME/docker
+    - $DOCKER_CACHE_DIR
 
 before_install:
-  - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
+  - set -e # Let's fail fast (as Travis CI doesn't by default, see travis-ci/travis-ci#1066)
+  - if [[ -d $DOCKER_CACHE_DIR ]]; then ls $DOCKER_CACHE_DIR/tests_$PLATFORM*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > docker-compose
   - chmod +x docker-compose
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - sudo pip install ansible==2.4.6.0 > /dev/null 2>&1
+  - sudo pip install ansible==$ANSIBLE_VERSION > /dev/null 2>&1
 
 script:
   - cd tests
-  - docker-compose up -d
-  - ansible-playbook user.yml -l centos
-  - ansible-playbook user.yml -l debian
-  - ansible-playbook user.yml -l ubuntu
+  - docker-compose config --services | grep $PLATFORM | xargs docker-compose up -d
+  - ansible-playbook $PLAYBOOK -l $PLATFORM
 
 before_cache:
+  # Put docker images used during this run into travis cache (if not already cached).
+  # Tarballs are named after the pattern <docker-repository>-<docker-image-id>.tar.gz,
+  # to allow "filtering" by platform type (e.g. only import debian images from cache).
   - >
-    mkdir -p $HOME/docker && docker images -a --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
-    | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
+    mkdir -p $DOCKER_CACHE_DIR && docker images -a --filter='dangling=false' --format '{{.Repository}} {{.ID}}' "tests_$PLATFORM*"
+    | xargs -n 2 -t sh -c 'test -e $DOCKER_CACHE_DIR/$0-$1.tar.gz || docker save $0 | gzip -2 > $DOCKER_CACHE_DIR/$0-$1.tar.gz'
+  # Show cache usage details (useful to know if a cache cleanup is needed)
+  - du -hs $DOCKER_CACHE_DIR/*
+  - du -hs $DOCKER_CACHE_DIR
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

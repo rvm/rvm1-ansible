@@ -163,9 +163,14 @@ Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play bo
 
 ## Requirements
 
-- Tested on CentOS 6 and 7
-- Tested on Debian 8 and 9
-- Tested on Ubuntu 14.04 and 16.04
+Potentially, any Linux/Unix system supported by Ansible and satisfying the [RVM prerequisites](https://rvm.io/rvm/prerequisites) should work.
+
+Compatibility with Linux distributions based on Debian, Ubuntu or Redhat families is actively tested.
+
+The continuous integration setup of this project currently covers following platforms:
+- CentOS 6, 7 and 8
+- Debian 8, 9 and 10
+- Ubuntu 14.04, 16.04, 18.04 and 20.04
 
 ## Ansible galaxy
 
