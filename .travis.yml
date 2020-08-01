@@ -25,6 +25,7 @@ cache:
     - $DOCKER_CACHE_DIR
 
 before_install:
+  - set -e # Let's fail fast (as Travis CI doesn't by default, see travis-ci/travis-ci#1066)
   - if [[ -d $DOCKER_CACHE_DIR ]]; then ls $DOCKER_CACHE_DIR/tests_$PLATFORM*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-`uname -s`-`uname -m` > docker-compose
