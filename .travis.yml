@@ -37,8 +37,10 @@ install:
 
 script:
   - cd tests
-  - docker-compose config --services | grep $PLATFORM | xargs docker-compose up -d
-  - ansible-playbook $PLAYBOOK -l $PLATFORM
+  - docker-compose config --services | grep "$PLATFORM" | xargs docker-compose up -d
+  - ansible-playbook $PLAYBOOK -l "$PLATFORM:&latest" --check --diff
+  - ansible-playbook $PLAYBOOK -l "$PLATFORM" -vv
+  - ansible-playbook $PLAYBOOK -l "$PLATFORM:&latest" --check --diff
 
 before_cache:
   # Put docker images used during this run into travis cache (if not already cached).
