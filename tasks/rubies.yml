@@ -1,11 +1,13 @@
 ---
 
+- name: Detect rubies
+  command: '{{ rvm1_rvm }} list strings'
+  register: rvm_list_strings
+  changed_when: False
+
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item }} {{ rvm1_ruby_install_flags }}'
-  when: rvm1_rubies is defined and rvm1_rubies | length > 0
-  with_items: '{{ rvm1_rubies }}'
-  register: rvm_install_rubies
-  changed_when: "'#importing gemset' in rvm_install_rubies.stdout"
+  loop: '{{ rvm1_rubies | difference(rvm_list_strings.stdout_lines) }}'
 
 - name: Detect default ruby version
   command: '{{ rvm1_rvm }} alias list default'
