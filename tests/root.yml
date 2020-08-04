@@ -1,19 +1,23 @@
 ---
-- hosts: all
+- name: RVM System Wide Setup
+  hosts: all
   gather_facts: false
   vars:
     rvm1_user: root
     rvm1_install_flags: '--auto-dotfiles'
-    rvm1_install_path: '/home/{{ rvm1_user }}/.rvm'
+    rvm1_install_path: '/opt/rvm'
     rvm1_rubies:
-      - 'ruby-2.2.5'
-      - 'ruby-2.3.1'
+      - 'ruby-{{ rvm_tests_mri_version_other }}'
+      - 'ruby-{{ rvm_tests_mri_version_default }}'
   roles:
-    - role: rvm1-ansible
+    - rvm1-ansible
+  tags: setup
 
-# Asserts tasks
-- hosts: all
+- name: RVM Setup Validation
+  hosts: all
   gather_facts: false
+  vars:
+    rvm1_install_path: '/opt/rvm'
   tasks:
-    - name: Assert tasks
-      import_tasks: assertions.yml
+    - import_tasks: assertions.yml
+  tags: validate
