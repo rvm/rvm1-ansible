@@ -39,7 +39,7 @@ script:
   - cd tests
   - docker-compose config --services | grep $PLATFORM | xargs docker-compose up -d
   # 'Simulate' a previous installation
-  - ansible-playbook $PLAYBOOK -l $PLATFORM -t setup -e '{"rvm1_rubies" : ["ruby-2.5.7"]}'
+  - ansible-playbook $PLAYBOOK -l $PLATFORM -t setup -e \{\"rvm1_rubies\":\[\"ruby-2.5.7\"\]\}
   # Execute the RVM and Ruby udpates and validate the final state
   - ansible-playbook $PLAYBOOK -l $PLATFORM
 
