@@ -9,6 +9,7 @@
     rvm1_rubies:
       - 'ruby-{{ rvm_tests_mri_version_other }}'
       - 'ruby-{{ rvm_tests_mri_version_default }}'
+    rvm1_delete_unmanaged_rubies: yes
   roles:
     - role: rvm1-ansible
       become: yes

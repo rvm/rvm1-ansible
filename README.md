@@ -39,7 +39,12 @@ rvm1_rubies:
 rvm1_bundler_install: True
 
 # Delete a specific version of ruby (ie. ruby-2.1.0)
+# DEPRECATED: Use 'rvm1_delete_unmanaged_rubies' instead,
+# as this option will be removed in a future release
 rvm1_delete_ruby:
+
+# Delete installed ruby versions that are not listed in 'rvm1_rubies'
+rvm1_delete_unmanaged_rubies: False
 
 # Install path for rvm (defaults to single user)
 # NOTE: If you are doing a ROOT BASED INSTALL then make sure you
@@ -157,9 +162,10 @@ A common work flow for upgrading your ruby version would be:
 2. Run your application role so that bundle install re-installs your gems
 3. Delete the previous version of ruby
 
-### Leverage ansible's `--extra-vars`
+### Leverage ansible-playbook `--extra-vars` argument
 
-Just add `--extra-vars 'rvm1_delete_ruby=ruby-2.1.0'` to the end of your play book command and that version will be removed.
+Just add `--extra-vars 'rvm1_delete_unmanaged_rubies=yes'` to the end of your ansible-playbook command
+to ensure that only the ruby versions managed by this role will be present on the target system.
 
 ## Requirements
 
