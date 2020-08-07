@@ -66,14 +66,14 @@
   command: '{{ rvm1_rvm }} list strings'
   changed_when: False
   register: rvm1_list_installed_rubies
-  when: rvm1_delete_unmanaged_rubies|bool or (rvm1_delete_ruby is defined and rvm1_delete_ruby != '')
+  when: rvm1_delete_unmanaged_rubies or (rvm1_delete_ruby is defined and rvm1_delete_ruby != '')
+  check_mode: no # Run in normal mode when in --check mode (http://docs.ansible.com/ansible/playbooks_checkmode.html)
 
 - name: Delete unmanaged ruby versions
   command: '{{ rvm1_rvm }} remove {{ item }}'
   register: rvm_delete_rubies_command_result
-  changed_when: "'#removing' in rvm_delete_rubies_command_result.stdout"
-  when: rvm1_delete_unmanaged_rubies|bool
-  with_items: '{{ rvm1_list_installed_rubies.stdout.splitlines() | difference(rvm1_rubies|default([])) }}'
+  when: rvm1_delete_unmanaged_rubies
+  with_items: '{{ rvm1_list_installed_rubies.stdout_lines | difference(rvm1_rubies|default([])) }}'
 
 - name: '[DEPRECATED] Delete {{ rvm1_delete_ruby }}'
   command: '{{ rvm1_rvm }} remove {{ rvm1_delete_ruby }}'
@@ -82,4 +82,4 @@
   when:
     - not rvm1_delete_unmanaged_rubies|bool
     - rvm1_delete_ruby is defined and rvm1_delete_ruby != ''
-    - rvm1_delete_ruby in rvm1_list_installed_rubies.stdout.splitlines()
+    - rvm1_delete_ruby in rvm1_list_installed_rubies.stdout_lines

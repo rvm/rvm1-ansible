@@ -164,7 +164,7 @@ A common work flow for upgrading your ruby version would be:
 
 ### Leverage ansible-playbook `--extra-vars` argument
 
-Just add `--extra-vars 'rvm1_delete_unmanaged_rubies=yes'` to the end of your ansible-playbook command
+Just add `--extra-vars '{ "rvm1_delete_unmanaged_rubies" : true }'` to the end of your ansible-playbook command
 to ensure that only the ruby versions managed by this role will be present on the target system.
 
 ## Requirements
