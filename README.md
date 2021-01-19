@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.org/rvm/rvm1-ansible.svg?branch=master)](https://travis-ci.org/rvm/rvm1-ansible)
 [![OpenCollective](https://opencollective.com/rvm/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/rvm/sponsors/badge.svg)](#sponsors)
-[![Ansible Role](https://img.shields.io/badge/role-rvm_io-red.svg)](https://galaxy.ansible.com/rvm/ruby)
+[![Ansible Role](https://img.shields.io/badge/role-rvm_io-red)](https://galaxy.ansible.com/rvm/ruby)
+[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/30318)](https://galaxy.ansible.com/rvm/ruby)
 
 ## What is rvm1-ansible?
 
