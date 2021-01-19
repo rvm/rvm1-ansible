@@ -8,7 +8,9 @@
     rvm1_install_path: '/opt/rvm'
     rvm1_rubies:
       - 'ruby-{{ rvm_tests_mri_version_other }}'
+      - 'ruby-{{ rvm_tests_mri_version_to_be_deleted }}'
       - 'ruby-{{ rvm_tests_mri_version_default }}'
+    rvm1_delete_ruby: 'ruby-{{ rvm_tests_mri_version_to_be_deleted }}'
   roles:
     - rvm1-ansible
   tags: setup

@@ -33,6 +33,17 @@
       - check_ruby_multiple.rc == 0
     msg: No multiple rubies installed
 
+- name: Check that ruby-{{ rvm_tests_mri_version_to_be_deleted }} is not present
+  command:
+    cmd: bash -lc 'rvm list strings'
+  register: check_ruby_delete
+  changed_when: false
+- assert:
+    that:
+      - "'ruby-{{ rvm_tests_mri_version_to_be_deleted }}' not in check_ruby_delete.stdout"
+      - check_ruby_delete.rc == 0
+    msg: ruby-{{ rvm_tests_mri_version_to_be_deleted }} is present
+
 - name: Check ruby switch
   command:
     cmd: bash -lc 'rvm use {{ rvm_tests_mri_version_other }} && ruby -v | cut -c1-10'
