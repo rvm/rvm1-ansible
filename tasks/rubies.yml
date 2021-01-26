@@ -4,6 +4,7 @@
   command: '{{ rvm1_rvm }} list strings'
   register: rvm_list_strings
   changed_when: False
+  check_mode: no # Run in normal mode when in --check mode (http://docs.ansible.com/ansible/playbooks_checkmode.html)
 
 - name: Install rubies
   command: '{{ rvm1_rvm }} install {{ item }} {{ rvm1_ruby_install_flags }}'

@@ -13,3 +13,8 @@ tests_ubuntu14_1 ansible_connection=docker
 tests_ubuntu16_1 ansible_connection=docker
 tests_ubuntu18_1 ansible_connection=docker
 tests_ubuntu20_1 ansible_connection=docker
+
+[latest]
+tests_centos8_1
+tests_debian10_1
+tests_ubuntu20_1
