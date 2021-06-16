@@ -45,7 +45,7 @@
     dest: '{{ rvm1_symlink_to }}/{{ item }}'
     owner: '{{ root_user }}'
     group: '{{ root_group }}'
-  when: not '--user-install' in rvm1_install_flags
+  when: not '--user-install' in rvm1_install_flags and rvm1_symlink
   with_items: '{{ rvm1_symlink_binaries }}'
 
 - name: Symlink bundler binaries on the system path
@@ -55,7 +55,7 @@
     dest: '{{ rvm1_symlink_to }}/{{ item }}'
     owner: '{{ root_user }}'
     group: '{{ root_group }}'
-  when: not '--user-install' in rvm1_install_flags and rvm1_bundler_install
+  when: not '--user-install' in rvm1_install_flags and rvm1_bundler_install and rvm1_symlink
   with_items: '{{ rvm1_symlink_bundler_binaries }}'
 
 - name: Delete ruby if relevant
