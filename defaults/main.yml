@@ -53,6 +53,10 @@ rvm1_gpg_key_servers:
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
 
+# Symlink Ruby related executables on the system path
+# for multi-user installation
+rvm1_symlink_for_multi_user_install: True
+
 # Name of UID 0 user
 root_user: 'root'
 
