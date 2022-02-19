@@ -48,6 +48,7 @@ rvm1_gpg_key_servers:
   - '{{ rvm1_gpg_key_server }}'
   - hkp://pgp.mit.edu
   - hkp://keyserver.pgp.com
+  - hkp://keyserver.ubuntu.com
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
