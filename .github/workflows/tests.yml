@@ -1,0 +1,24 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - ubuntu-latest
+          - macos-latest
+        playbook:
+          - user.yml
+          - root.yml
+    runs-on: ${{ matrix.platform }}
+    defaults:
+      run:
+        working-directory: scripts
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v2
+        with:
+          cache: 'pip'
+          cache-dependency-path: |
+            .github/workflows/tests.yml
