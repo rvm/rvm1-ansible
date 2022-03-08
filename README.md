@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rvm/rvm1-ansible.svg?branch=master)](https://travis-ci.org/rvm/rvm1-ansible)
+[![Build Status](https://github.com/rvm/rvm1-ansible/actions/workflows/tests.yml/badge.svg)](https://github.com/rvm/rvm1-ansible/actions/workflows/tests.yml)
 [![OpenCollective](https://opencollective.com/rvm/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/rvm/sponsors/badge.svg)](#sponsors)
 [![Ansible Role](https://img.shields.io/badge/role-rvm_io-red)](https://galaxy.ansible.com/rvm/ruby)
