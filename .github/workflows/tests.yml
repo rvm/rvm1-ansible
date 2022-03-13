@@ -1,20 +1,25 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - develop
+      - main
+      - master
+  pull_request:
+  schedule:
+    - cron: '46 3 20 * *'
 jobs:
   tests:
     strategy:
       fail-fast: false
       matrix:
-        platform:
-          - ubuntu-latest
-          - macos-latest
         playbook:
           - user.yml
           - root.yml
-    runs-on: ${{ matrix.platform }}
+    runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: scripts
+        working-directory: tests
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v2
@@ -22,3 +27,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: |
             .github/workflows/tests.yml
+      - name: Launch containers
+        run: docker-compose up -d
+      - name: Run Ansible on all containers
+        run: ansible-playbook $playbook
