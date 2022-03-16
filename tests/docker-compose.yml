@@ -10,6 +10,8 @@ services:
     cap_add: [ALL]
   centos8:
     build: ./dockerfiles/centos8
+  centos_stream8:
+    build: ./dockerfiles/centos_stream8
     cap_add: [ALL]
 
   debian8:

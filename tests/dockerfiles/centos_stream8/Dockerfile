@@ -1,0 +1,12 @@
+FROM quay.io/centos/centos:stream8
+
+RUN dnf update -y \
+	&& dnf install -y \
+		sudo \
+		which \
+	&& dnf clean all
+
+RUN useradd -ms /bin/bash user && \
+	echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
+CMD ["/usr/sbin/init"]
