@@ -170,8 +170,8 @@ Compatibility with Linux distributions based on Debian, Ubuntu or Redhat familie
 
 The continuous integration setup of this project currently covers following platforms:
 - CentOS 6, 7 and 8
-- Debian 8, 9 and 10
-- Ubuntu 14.04, 16.04, 18.04 and 20.04
+- Debian 8, 9, 10 and 11
+- Ubuntu 14.04, 16.04, 18.04, 20.04, 21.10 and 22.04
 
 ## Ansible galaxy
 

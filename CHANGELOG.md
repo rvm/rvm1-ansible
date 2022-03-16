@@ -17,6 +17,8 @@
 
 #### Changes
 
+* Extend test matrix with: (#xxx)
+  * Debian 11, Ubuntu 21.10 & 22.04
 * Extend test matrix with: (#215)
   * CentOS 8, Debian 10, Ubuntu 18.04 and 20.04
   * Ruby 2.6.6 and 2.7.1

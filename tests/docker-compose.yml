@@ -21,6 +21,9 @@ services:
   debian10:
     build: ./dockerfiles/debian10
     cap_add: [ALL]
+  debian11:
+    build: ./dockerfiles/debian11
+    cap_add: [ALL]
 
   ubuntu14:
     build: ./dockerfiles/ubuntu14
@@ -33,4 +36,10 @@ services:
     cap_add: [ALL]
   ubuntu20:
     build: ./dockerfiles/ubuntu20
+    cap_add: [ALL]
+  ubuntu21:
+    build: ./dockerfiles/ubuntu21
+    cap_add: [ALL]
+  ubuntu22:
+    build: ./dockerfiles/ubuntu22
     cap_add: [ALL]
