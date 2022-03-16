@@ -4,7 +4,7 @@ RUN apt-get update \
 	&& apt-get install -y \
 		curl \
 		gpg \
-		python \
+		python3 \
 		sudo \
 		systemd \
 	&& apt-get clean \
@@ -13,4 +13,4 @@ RUN apt-get update \
 RUN useradd -ms /bin/bash user && \
 	echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-CMD ["/lib/systemd/systemd"]
+CMD ["/usr/bin/sleep", "infinity"]

@@ -1,7 +1,8 @@
 FROM ubuntu:21.10
 
 RUN apt-get update \
-	&& apt-get install -y \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install \
+		-y --no-install-recommends \
 		curl \
 		gpg \
 		python \
@@ -13,4 +14,4 @@ RUN apt-get update \
 RUN useradd -ms /bin/bash user && \
 	echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-CMD ["/lib/systemd/systemd"]
+CMD ["/usr/bin/sleep", "infinity"]
