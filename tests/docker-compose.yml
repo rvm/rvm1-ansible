@@ -4,6 +4,7 @@ services:
   centos6:
     build: ./dockerfiles/centos6
     cap_add: [ALL]
+    init: true
   centos7:
     build: ./dockerfiles/centos7
     cap_add: [ALL]
