@@ -31,3 +31,5 @@ jobs:
         run: docker-compose up -d
       - name: Run Ansible on all containers
         run: ansible-playbook $playbook
+      - name: Shut down containers
+        run: docker-compose down
