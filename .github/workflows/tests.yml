@@ -30,6 +30,6 @@ jobs:
       - name: Launch containers
         run: docker-compose up -d
       - name: Run Ansible on all containers
-        run: ansible-playbook $playbook
+        run: ansible-playbook ${{ matrix.playbook }}
       - name: Shut down containers
         run: docker-compose down
