@@ -16,4 +16,3 @@ tests_ubuntu16_1 ansible_connection=docker
 tests_ubuntu18_1 ansible_connection=docker
 tests_ubuntu20_1 ansible_connection=docker
 tests_ubuntu21_1 ansible_connection=docker
-tests_ubuntu22_1 ansible_connection=docker

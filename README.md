@@ -172,7 +172,7 @@ The continuous integration setup of this project currently covers following plat
 - CentOS 6, 7 and 8
 - CentOS Stream 8
 - Debian 8, 9, 10 and 11
-- Ubuntu 14.04, 16.04, 18.04, 20.04, 21.10 and 22.04
+- Ubuntu 14.04, 16.04, 18.04, 20.04 and 21.10
 
 ## Ansible galaxy
 
