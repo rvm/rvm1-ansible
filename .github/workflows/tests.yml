@@ -44,7 +44,7 @@ jobs:
 
         # Docker Image Caching: Step 3
       - name: Launch containers
-      - run: docker-compose up --build -d
+        run: docker-compose up --build -d
 
         # Run the tests
       - name: Run Ansible on all containers
