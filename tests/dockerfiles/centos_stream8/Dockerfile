@@ -2,6 +2,7 @@ FROM quay.io/centos/centos:stream8
 
 RUN dnf update -y \
 	&& dnf install -y \
+		procps \
 		sudo \
 		which \
 	&& dnf clean all
