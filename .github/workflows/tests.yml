@@ -46,8 +46,7 @@ jobs:
       - name: Launch containers
         run: docker-compose up --build -d
 
-        # Run the tests
-      - name: Run Ansible on all containers
+      - name: Run The Tests
         run: ansible-playbook ${{ matrix.playbook }}
 
       - name: Shut down containers
