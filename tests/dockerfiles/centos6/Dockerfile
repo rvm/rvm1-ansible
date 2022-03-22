@@ -12,4 +12,4 @@ RUN sed -i -e 's/mirrorlist/#mirrorlist/g' \
 RUN useradd -ms /bin/bash user && \
 	echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-CMD ["/bin/sleep", "2m"]
+CMD ["/bin/sleep", "29m"]
