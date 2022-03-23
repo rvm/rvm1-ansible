@@ -12,6 +12,8 @@
 * Fix boolean values when checking array (#207)
 * Fix regression forbidding installation of rubies (#209, fixed via #207)
 * Fix conditional logic for detecting and removing versions of Ruby (#212)
+* Report when Ruby is removed and don't ignore when version listing fails (#212)
+* Refactor rubies install and remove tasks, allow rvm to handle idempotency around this (#219)
 
 #### Changes
 
