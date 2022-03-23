@@ -23,12 +23,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: actions/setup-python@v2
-        with:
-          cache: 'pip'
-          cache-dependency-path: |
-            .github/workflows/tests.yml
-
         # Docker Image Caching: Step 1
         # Pull the latest image to build, and avoid caching pull-only images.
         # (docker pull is faster than caching in most cases.)
