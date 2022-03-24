@@ -13,10 +13,6 @@ services:
   centos_stream8:
     build: ./dockerfiles/centos_stream8
     cap_add: [ALL]
-  centos_stream9:
-    build: ./dockerfiles/centos_stream9
-    cap_add: [ALL]
-    init: true
 
   debian8:
     build: ./dockerfiles/debian8
