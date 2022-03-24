@@ -42,3 +42,4 @@ services:
   ubuntu21:
     build: ./dockerfiles/ubuntu21
     cap_add: [ALL]
+    init: true

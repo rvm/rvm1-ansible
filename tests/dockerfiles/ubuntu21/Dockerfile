@@ -16,4 +16,4 @@ RUN apt-get update \
 RUN useradd -ms /bin/bash user && \
 	echo 'user ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
 
-CMD ["/usr/bin/sleep", "infinity"]
+CMD ["/usr/bin/env", "sleep", "29m"]
