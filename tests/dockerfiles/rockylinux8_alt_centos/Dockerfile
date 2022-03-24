@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:stream8
+FROM rockylinux:8
 
 RUN dnf update -y \
 	&& dnf install -y \
