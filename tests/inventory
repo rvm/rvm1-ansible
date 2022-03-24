@@ -3,6 +3,7 @@ tests_centos6_1 ansible_connection=docker
 tests_centos7_1 ansible_connection=docker
 tests_centos8_1 ansible_connection=docker
 tests_centos_stream8_1 ansible_connection=docker
+tests_centos_stream9_1 ansible_connection=docker
 
 [debian]
 tests_debian8_1 ansible_connection=docker

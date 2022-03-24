@@ -170,7 +170,7 @@ Compatibility with Linux distributions based on Debian, Ubuntu or Redhat familie
 
 The continuous integration setup of this project currently covers following platforms:
 - CentOS 6, 7 and 8
-- CentOS Stream 8
+- CentOS Stream 8 and 9
 - Debian 8, 9, 10 and 11
 - Ubuntu 14.04, 16.04, 18.04, 20.04 and 21.10
 
