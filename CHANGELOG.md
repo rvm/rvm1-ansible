@@ -17,7 +17,7 @@
 
 #### Changes
 
-* Extend test matrix with: (#234)
+* Extend test matrix with: (#235)
   * Rocky Linux 8, Debian 11, Ubuntu 21.10
 * Extend test matrix with: (#215)
   * CentOS 8, Debian 10, Ubuntu 18.04 and 20.04
