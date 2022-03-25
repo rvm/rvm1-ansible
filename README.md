@@ -144,11 +144,13 @@ rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/someuser/.rvm'
 ```
 
-#### A quick note about `rvm1_user`
+#### Quick notes about `rvm1_user`
 
 In some cases you may want the rvm folder and its files to be owned by a specific
 user instead of root. Simply set `rvm1_user: 'foo'` and when ruby gets installed
 it will ensure that `foo` owns the rvm directory.
+
+This would use Ansible's `become` under the hood. In case of failures (e.g. `Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user`), check https://docs.ansible.com/ansible/latest/user_guide/become.html for details and possible solutions.
 
 ## Upgrading and removing old versions of ruby
 
