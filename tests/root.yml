@@ -20,4 +20,5 @@
     rvm1_install_path: '/opt/rvm'
   tasks:
     - import_tasks: assertions.yml
+      when: not ansible_check_mode
   tags: validate

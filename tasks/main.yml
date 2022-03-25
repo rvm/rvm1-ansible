@@ -5,7 +5,16 @@
   become: yes
   become_user: '{{ rvm1_user }}'
 
+- name: Check that RVM is installed
+  stat:
+    path: '{{ rvm1_rvm }}'
+  register: rvm_binary_check
+  ignore_errors: ansible_check_mode
+  changed_when: no
+  check_mode: no # Run in normal mode when in --check mode (http://docs.ansible.com/ansible/playbooks_checkmode.html)
+
 - name: Install Ruby and Gems
   import_tasks: 'rubies.yml'
   become: yes
   become_user: '{{ rvm1_user }}'
+  when: rvm_binary_check.stat.exists
