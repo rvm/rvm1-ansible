@@ -44,7 +44,7 @@
 
 - name: Install rvm
   shell: >
-    {{ rvm1_temp_download_path }}/rvm-installer.sh {{ rvm1_rvm_version }}
+    /usr/bin/env bash {{ rvm1_temp_download_path }}/rvm-installer.sh {{ rvm1_rvm_version }}
     --path {{ rvm1_install_path }} {{ rvm1_install_flags }}
   when: not rvm_binary.stat.exists
 

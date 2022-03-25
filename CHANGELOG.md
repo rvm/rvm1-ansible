@@ -8,6 +8,7 @@
 
 #### Bug fixes
 
+* Fix RHEL 7 & 8 based distros to work around /tmp execution issues (#155)
 * Fix bare variables in conditionals (deprecation warnings with Ansible 2.8+) (#204)
 * Fix boolean values when checking array (#207)
 * Fix regression forbidding installation of rubies (#209, fixed via #207)
