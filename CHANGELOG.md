@@ -14,6 +14,7 @@
 * Fix conditional logic for detecting and removing versions of Ruby (#212)
 * Report when Ruby is removed and don't ignore when version listing fails (#212)
 * Refactor rubies install and remove tasks, allow rvm to handle idempotency around this (#219)
+* Update key server URLs and decommission of sks-keyservers.net (#232)
 
 #### Changes
 
