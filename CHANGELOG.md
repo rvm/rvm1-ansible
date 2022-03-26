@@ -5,6 +5,7 @@
 #### New features
 
 * Report when Ruby is removed and don't ignore when version listing fails (#212)
+* Add option to disable binary symlink (#94)
 
 #### Bug fixes
 
