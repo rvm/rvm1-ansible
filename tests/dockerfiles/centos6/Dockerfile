@@ -1,4 +1,4 @@
-FROM quay.io/centos/centos:centos6
+FROM centos:6
 
 RUN sed -i -e 's/mirrorlist/#mirrorlist/g' \
 		-e 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' \
