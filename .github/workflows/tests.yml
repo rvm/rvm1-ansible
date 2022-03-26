@@ -1,0 +1,59 @@
+name: CI
+on:
+  push:
+  pull_request:
+  # Run monthly as a canary for issues such as package installation failure.
+  # Note: scheduled workflows are disabled automatically after 60 days of
+  # repository inactivity.
+  # https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow
+  schedule:
+    - cron: '46 3 20 * *'
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        playbook:
+          - user.yml
+          - root.yml
+        platform:
+          - centos
+          - debian
+          - ubuntu
+
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: tests
+
+    steps:
+      - uses: actions/checkout@v3
+
+      # Docker Image Caching: Step 1
+      # Pull the latest image to build, and avoid caching pull-only images.
+      # (docker pull is faster than caching in most cases.)
+      - run: docker-compose pull
+
+      # Docker Image Caching: Step 2
+      # In this step, this action saves a list of existing images,
+      # the cache is created without them in the post run.
+      # It also restores the cache if it exists.
+      - uses: satackey/action-docker-layer-caching@v0.0.11
+        # Ignore the failure of a step and avoid terminating the job.
+        continue-on-error: true
+
+      # Docker Image Caching: Step 3
+      - name: Launch containers
+        run: ls -1 ./dockerfiles/ | fgrep ${{ matrix.platform }} | xargs docker-compose up --build -d
+
+      - name: Run The Tests
+        run: ansible-playbook ${{ matrix.playbook }} -l ${{ matrix.platform }}
+
+      - name: Shut down containers
+        run: docker-compose down
+
+      # Docker Image Caching: Step 4
+      # Finally a post-run action of satackey/action-docker-layer-caching,
+      # which is the process of saving the cache, will be executed automatically.
