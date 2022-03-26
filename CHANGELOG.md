@@ -8,12 +8,14 @@
 
 #### Bug fixes
 
+* Fix RHEL 7 & 8 based distros to work around /tmp execution issues (#155)
 * Fix bare variables in conditionals (deprecation warnings with Ansible 2.8+) (#204)
 * Fix boolean values when checking array (#207)
 * Fix regression forbidding installation of rubies (#209, fixed via #207)
 * Fix conditional logic for detecting and removing versions of Ruby (#212)
 * Report when Ruby is removed and don't ignore when version listing fails (#212)
 * Refactor rubies install and remove tasks, allow rvm to handle idempotency around this (#219)
+* Update key server URLs and decommission of sks-keyservers.net (#232)
 
 #### Changes
 
