@@ -31,20 +31,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-        # Docker Image Caching: Step 1
-        # Pull the latest image to build, and avoid caching pull-only images.
-        # (docker pull is faster than caching in most cases.)
+      # Docker Image Caching: Step 1
+      # Pull the latest image to build, and avoid caching pull-only images.
+      # (docker pull is faster than caching in most cases.)
       - run: docker-compose pull
 
-        # Docker Image Caching: Step 2
-        # In this step, this action saves a list of existing images,
-        # the cache is created without them in the post run.
-        # It also restores the cache if it exists.
+      # Docker Image Caching: Step 2
+      # In this step, this action saves a list of existing images,
+      # the cache is created without them in the post run.
+      # It also restores the cache if it exists.
       - uses: satackey/action-docker-layer-caching@v0.0.11
         # Ignore the failure of a step and avoid terminating the job.
         continue-on-error: true
 
-        # Docker Image Caching: Step 3
+      # Docker Image Caching: Step 3
       - name: Launch containers
         run: ls -1 ./dockerfiles/ | fgrep ${{ matrix.platform }} | xargs docker-compose up --build -d
 
@@ -54,6 +54,6 @@ jobs:
       - name: Shut down containers
         run: docker-compose down
 
-    # Docker Image Caching: Step 4
-    # Finally a post-run action of satackey/action-docker-layer-caching,
-    # which is the process of saving the cache, will be executed automatically
+      # Docker Image Caching: Step 4
+      # Finally a post-run action of satackey/action-docker-layer-caching,
+      # which is the process of saving the cache, will be executed automatically.
