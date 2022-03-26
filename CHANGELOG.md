@@ -2,6 +2,12 @@
 
 ### NEXT
 
+...
+
+
+### 2.2.0
+2022-03-26 &middot; [Changes](https://github.com/rvm/rvm1-ansible/compare/v2.1.2...v2.2.0)
+
 #### New features
 
 * Report when Ruby is removed and don't ignore when version listing fails (#212)
