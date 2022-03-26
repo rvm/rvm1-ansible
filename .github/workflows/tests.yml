@@ -6,6 +6,11 @@ on:
       - main
       - master
   pull_request:
+
+  # Run monthly as a canary for issues such as package installation failure.
+  # Note: scheduled workflows are disabled automatically after 60 days of
+  # repository inactivity.
+  # https://docs.github.com/en/actions/managing-workflow-runs/disabling-and-enabling-a-workflow
   schedule:
     - cron: '46 3 20 * *'
 
