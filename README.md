@@ -80,6 +80,9 @@ rvm1_gpg_key_server: 'hkp://keys.openpgp.org'
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
+
+# Symlink binaries to system path
+rvm1_symlink: true
 ```
 
 ## Example playbooks
