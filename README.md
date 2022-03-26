@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.org/rvm/rvm1-ansible.svg?branch=master)](https://travis-ci.org/rvm/rvm1-ansible)
 [![OpenCollective](https://opencollective.com/rvm/backers/badge.svg)](#backers)
 [![OpenCollective](https://opencollective.com/rvm/sponsors/badge.svg)](#sponsors)
-[![Ansible Role](https://img.shields.io/badge/role-rvm_io-red.svg)](https://galaxy.ansible.com/rvm/ruby)
+[![Ansible Role](https://img.shields.io/badge/role-rvm_io-red)](https://galaxy.ansible.com/rvm/ruby)
+[![Ansible Role Downloads](https://img.shields.io/ansible/role/d/30318)](https://galaxy.ansible.com/rvm/ruby)
 
 ## What is rvm1-ansible?
 
@@ -75,7 +76,7 @@ rvm1_rvm_check_for_updates: True
 rvm1_gpg_keys: '409B6B1796C275462A1703113804BB82D39DC0E3'
 
 # The GPG key server
-rvm1_gpg_key_server: 'hkp://pool.sks-keyservers.net'
+rvm1_gpg_key_server: 'hkp://keys.openpgp.org'
 
 # autolib mode, see https://rvm.io/rvm/autolibs
 rvm1_autolib_mode: 3
@@ -143,11 +144,13 @@ rvm1_install_flags: '--auto-dotfiles --user-install'
 rvm1_install_path: '/home/someuser/.rvm'
 ```
 
-#### A quick note about `rvm1_user`
+#### Quick notes about `rvm1_user`
 
 In some cases you may want the rvm folder and its files to be owned by a specific
 user instead of root. Simply set `rvm1_user: 'foo'` and when ruby gets installed
 it will ensure that `foo` owns the rvm directory.
+
+This would use Ansible's `become` under the hood. In case of failures (e.g. `Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user`), check https://docs.ansible.com/ansible/latest/user_guide/become.html for details and possible solutions.
 
 ## Upgrading and removing old versions of ruby
 
